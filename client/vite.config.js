@@ -17,5 +17,21 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    build: {
+      // Use esbuild for faster minification (default in Vite 5)
+      minify: "esbuild",
+      // Split CSS into separate files per chunk
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          // Split large vendor libraries into separate chunks
+          manualChunks: {
+            "vendor-react": ["react", "react-dom", "react-router-dom"],
+            "vendor-gsap": ["gsap"],
+            "vendor-axios": ["axios"],
+          },
+        },
+      },
+    },
   };
 });

@@ -5,8 +5,6 @@
   align-items: start;
 }
 
-.info {}
-
 .infoTitle {
   font-size: 1.5rem;
   font-weight: 700;
@@ -100,19 +98,42 @@ a.contactVal:hover { color: var(--primary); }
   margin-bottom: 24px;
 }
 
-/* ─── Resume card ─── */
-.resumeCard {
+/* ─── Resume Banner ─── */
+.resumeBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 36px;
+  margin-bottom: 40px;
+  border-radius: var(--radius-lg);
+  background: var(--gradient);
+  position: relative;
+  overflow: hidden;
+}
+
+.resumeBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.resumeBannerLeft {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 24px 28px;
+  flex: 1;
+  min-width: 0;
 }
 
-.resumeIcon {
+.resumeBannerIcon {
   width: 56px;
   height: 56px;
   border-radius: var(--radius-md);
-  background: var(--gradient);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,19 +142,42 @@ a.contactVal:hover { color: var(--primary); }
   flex-shrink: 0;
 }
 
-.resumeTitle {
-  font-size: 1rem;
-  font-weight: 600;
+.resumeBannerTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
   margin-bottom: 4px;
+  line-height: 1.3;
 }
 
-.resumeDesc {
-  font-size: 0.82rem;
-  color: var(--text-muted);
+.resumeBannerSub {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.resumeBannerBtn {
+  flex-shrink: 0;
+  background: #fff !important;
+  color: var(--primary) !important;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  white-space: nowrap;
 }
 
 @media (max-width: 900px) {
   .layout { grid-template-columns: 1fr; }
-  .resumeCard { flex-wrap: wrap; }
-  .resumeCard .gradient-btn { margin-left: 0; }
+  .resumeBanner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 20px;
+  }
+  .resumeBannerBtn {
+    width: 100%;
+    justify-content: center;
+  }
 }

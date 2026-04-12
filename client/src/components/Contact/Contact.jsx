@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { submitContact, getResumeUrl } from "../../services/api";
+import { submitContact, getResume } from "../../services/api";
 import styles from "./Contact.module.css";
 
 const INITIAL_FORM = { name: "", email: "", message: "" };
@@ -20,6 +20,7 @@ const Contact = () => {
     const [errors, setErrors] = useState({});
     const [status, setStatus] = useState(null); // null | 'loading' | 'success' | 'error'
     const [serverMsg, setServerMsg] = useState("");
+    const [resumeStatus, setResumeStatus] = useState(null); // null | 'loading' | 'success' | 'error'
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,12 +52,59 @@ const Contact = () => {
         }
     };
 
+    const handleResumeDownload = async (e) => {
+        e.preventDefault();
+        setResumeStatus("loading");
+        try {
+            const { data } = await getResume();
+            if (data.success && data.url) {
+                const link = document.createElement("a");
+                link.href = data.url;
+                link.click();
+                setResumeStatus("success");
+                setTimeout(() => setResumeStatus(null), 3000);
+            }
+        } catch (err) {
+            setResumeStatus("error");
+            setTimeout(() => setResumeStatus(null), 3000);
+        }
+    };
+
     return (
         <section id="contact" className={`section section-alt`}>
             <div className="container">
                 <div className="section-header">
                     <h2>Get In Touch</h2>
                     <div className="section-divider" />
+                </div>
+
+                {/* ── Resume Banner ─────────────────────────────── */}
+                <div className={styles.resumeBanner}>
+                    <div className={styles.resumeBannerLeft}>
+                        <div className={styles.resumeBannerIcon}>
+                            <i className="fas fa-file-alt" />
+                        </div>
+                        <div>
+                            <h3 className={styles.resumeBannerTitle}>Want to know more about me?</h3>
+                            <p className={styles.resumeBannerSub}>Download my resume — skills, experience &amp; projects, all in one place.</p>
+                        </div>
+                    </div>
+                    <button
+                        id="resume-download-btn"
+                        onClick={handleResumeDownload}
+                        disabled={resumeStatus === "loading"}
+                        className={`gradient-btn ${styles.resumeBannerBtn}`}
+                    >
+                        {resumeStatus === "loading" ? (
+                            <><i className="fas fa-spinner fa-spin" /> Downloading...</>
+                        ) : resumeStatus === "success" ? (
+                            <><i className="fas fa-check" /> Downloaded!</>
+                        ) : resumeStatus === "error" ? (
+                            <><i className="fas fa-exclamation-triangle" /> Try Again</>
+                        ) : (
+                            <><i className="fas fa-download" /> Download CV</>
+                        )}
+                    </button>
                 </div>
 
                 <div className={styles.layout}>
@@ -208,25 +256,6 @@ const Contact = () => {
                             </form>
                         </div>
 
-                        {/* Resume Download */}
-                        <div className={`card ${styles.resumeCard}`}>
-                            <div className={styles.resumeIcon}>
-                                <i className="fas fa-file-pdf" />
-                            </div>
-                            <div>
-                                <h4 className={styles.resumeTitle}>My Resume</h4>
-                                <p className={styles.resumeDesc}>
-                                    Download to learn more about my experience and qualifications.
-                                </p>
-                            </div>
-                            <a
-                                href={getResumeUrl()}
-                                className="gradient-btn"
-                                style={{ marginLeft: "auto", flexShrink: 0 }}
-                            >
-                                <i className="fas fa-download" /> Download
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
