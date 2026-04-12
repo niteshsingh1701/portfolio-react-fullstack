@@ -1,0 +1,36 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px;
+}
+
+.skill-tag.core {
+  border: 1px solid #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+  font-weight: 500;
+}
+
+.groupTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quote {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-style: italic;
+  margin-top: 56px;
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; gap: 36px; }
+}
