@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { submitContact, getResumeUrl } from "../../services/api";
+import { submitContact, getResume } from "../../services/api";
 import styles from "./Contact.module.css";
 
 const INITIAL_FORM = { name: "", email: "", message: "" };
@@ -20,6 +20,7 @@ const Contact = () => {
     const [errors, setErrors] = useState({});
     const [status, setStatus] = useState(null); // null | 'loading' | 'success' | 'error'
     const [serverMsg, setServerMsg] = useState("");
+    const [resumeStatus, setResumeStatus] = useState(null); // null | 'loading' | 'success' | 'error'
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -48,6 +49,24 @@ const Contact = () => {
             setServerMsg(
                 err.response?.data?.message || "Something went wrong. Please try again."
             );
+        }
+    };
+
+    const handleResumeDownload = async (e) => {
+        e.preventDefault();
+        setResumeStatus("loading");
+        try {
+            const { data } = await getResume();
+            if (data.success && data.url) {
+                const link = document.createElement("a");
+                link.href = data.url;
+                link.click();
+                setResumeStatus("success");
+                setTimeout(() => setResumeStatus(null), 3000);
+            }
+        } catch (err) {
+            setResumeStatus("error");
+            setTimeout(() => setResumeStatus(null), 3000);
         }
     };
 
@@ -219,13 +238,22 @@ const Contact = () => {
                                     Download to learn more about my experience and qualifications.
                                 </p>
                             </div>
-                            <a
-                                href={getResumeUrl()}
+                            <button
+                                onClick={handleResumeDownload}
+                                disabled={resumeStatus === "loading"}
                                 className="gradient-btn"
-                                style={{ marginLeft: "auto", flexShrink: 0 }}
+                                style={{ marginLeft: "auto", flexShrink: 0, border: "none", cursor: "pointer", fontFamily: "inherit", fontSize: "inherit" }}
                             >
-                                <i className="fas fa-download" /> Download
-                            </a>
+                                {resumeStatus === "loading" ? (
+                                    <><i className="fas fa-spinner fa-spin" /> downloading...</>
+                                ) : resumeStatus === "success" ? (
+                                    <><i className="fas fa-check" /> Downloaded!</>
+                                ) : resumeStatus === "error" ? (
+                                    <><i className="fas fa-exclamation-triangle" /> Failed</>
+                                ) : (
+                                    <><i className="fas fa-download" /> Download</>
+                                )}
+                            </button>
                         </div>
                     </div>
                 </div>

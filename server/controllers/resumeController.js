@@ -1,42 +1,28 @@
-const path = require("path");
-const fs = require("fs");
-
 // Track download count in memory (replace with DB counter for production)
 let downloadCount = 0;
 
 // GET /api/resume
 const downloadResume = (req, res) => {
-  // Look for resume either in the server root or in the parent (existing) project root
-  const serverDir = path.resolve(__dirname, "../..");
-  const candidates = [
-    path.join(serverDir, "server", "assets", "Resume_Nitesh.pdf"),
-    path.join(serverDir, "..", "Resume_Nitesh.pdf"),  // existing project root
-  ];
-
-  let resumePath = null;
-  for (const candidate of candidates) {
-    if (fs.existsSync(candidate)) {
-      resumePath = candidate;
-      break;
-    }
-  }
-
-  if (!resumePath) {
-    return res.status(404).json({
-      success: false,
-      message: "Resume file not found. Please check server configuration.",
-    });
-  }
-
   downloadCount++;
   console.log(`📄 Resume downloaded (total: ${downloadCount})`);
 
-  res.setHeader("Content-Type", "application/pdf");
-  res.setHeader(
-    "Content-Disposition",
-    'attachment; filename="Resume_Nitesh_Singh.pdf"'
-  );
-  res.download(resumePath, "Resume_Nitesh_Singh.pdf");
+  // Direct download link generated from your Google Drive URL
+  const fileId = process.env.RESUME_DRIVE_ID;
+
+  if (!fileId) {
+    return res.status(500).json({
+      success: false,
+      message: "Resume Drive ID is not configured on the server. Please set RESUME_DRIVE_ID in your .env file."
+    });
+  }
+
+  const externalResumeLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
+  
+  return res.json({
+    success: true,
+    message: "Resume URL generated successfully",
+    url: externalResumeLink
+  });
 };
 
 // GET /api/resume/count — optional stats endpoint

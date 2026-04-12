@@ -12,6 +12,6 @@ export const getProjects = () => api.get("/projects");
 
 export const getProjectById = (id) => api.get(`/projects/${id}`);
 export const submitContact = (data) => api.post("/contact", data);
-export const getResumeUrl = () => `${BASE_URL}/resume`;
+export const getResume = () => api.get("/resume");
 
 export default api;
