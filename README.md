@@ -1,103 +1,64 @@
-# 🚀 Portfolio React App — Full-Stack
+# Nitesh Singh - Personal Portfolio
 
-> A production-style full-stack portfolio by **Nitesh Singh**, rebuilt with React (Vite) + Node.js/Express + MongoDB.
+This is the repository for my personal portfolio website. It's a full-stack application built with React on the frontend and Node.js/Express on the backend.
 
----
+## Project Structure
 
-## 📁 Folder Structure
+The project is split into two main directories:
+- `client/` - React frontend built with Vite
+- `server/` - Node.js and Express backend API
 
-```
-portfolio-react-app/
-├── client/        → React Vite frontend (port 5173)
-└── server/        → Express backend (port 5000)
-```
+## Tech Stack
 
----
+- **Frontend:** React 18, Vite, React Router, GSAP for animations, CSS Modules
+- **Backend:** Node.js, Express, MongoDB (Mongoose)
 
-## ⚙️ Getting Started
+## Local Development
 
-### 1. Backend
+To run this project locally, you'll need Node.js installed.
 
-```bash
-cd server
-npm install
+### Backend Setup
 
-# Optional: copy .env.example to .env and set MONGO_URI
-# Without MONGO_URI the server uses in-memory fallback automatically
-cp .env.example .env
-
-npm run dev       # nodemon server.js
-```
-
-**Backend runs on:** `http://localhost:5000`
-
-#### Available API Endpoints
-
-| Method | Route | Description |
-|--------|-------|-------------|
-| GET | `/api/projects` | All projects |
-| GET | `/api/projects/:id` | Single project |
-| POST | `/api/contact` | Submit contact form |
-| GET | `/api/resume` | Download resume PDF |
-| GET | `/api/resume/count` | Download count |
-
-### 2. Frontend
-
-```bash
-cd client
-npm install
-npm run dev       # Vite dev server
-```
-
-**Frontend runs on:** `http://localhost:5173`
-
-The Vite dev server automatically proxies `/api/*` → `http://localhost:5000` so no CORS config needed.
-
----
-
-## 🗄️ MongoDB (Optional)
-
-To use MongoDB persistence:
-
-1. Ensure MongoDB is running locally: `mongod`
-2. Set in `server/.env`:
-   ```
-   MONGO_URI=mongodb://localhost:27017/portfolio
-   ```
-3. Seed the database with all 11 projects:
+1. Navigate to the server directory:
    ```bash
    cd server
-   npm run seed
+   npm install
    ```
 
-If `MONGO_URI` is not set, the server automatically falls back to in-memory data — **no MongoDB required to run**.
+2. Create a `.env` file based on `.env.example`.
+   - If you don't provide a `MONGO_URI`, the backend will fall back to using in-memory data for development purposes.
 
----
+3. Start the backend server:
+   ```bash
+   npm run dev
+   ```
+   The API will be available at `http://localhost:5000`.
 
-## 🎨 Features
+*(Optional) Database Seeding:*
+If you are using MongoDB, you can seed the database with initial project data by running `npm run seed` in the server directory.
 
-- ✅ GSAP hero animations with staggered timeline
-- ✅ Animated role text carousel
-- ✅ Projects fetched from API via custom `useFetchProjects` hook
-- ✅ Project category filters (All / React / WordPress / HTML/CSS / Full-Stack)
-- ✅ Flip card hover effect on project cards
-- ✅ `/project/:id` detail page with full project info
-- ✅ Contact form with client + server validation
-- ✅ Resume download via backend endpoint
-- ✅ Dark / Light theme toggle with localStorage persistence
-- ✅ Smooth scroll navigation
-- ✅ Fully responsive (mobile-first)
+### Frontend Setup
 
----
+1. Open a new terminal and navigate to the client directory:
+   ```bash
+   cd client
+   npm install
+   ```
 
-## 🔧 Tech Stack
+2. Start the Vite development server:
+   ```bash
+   npm run dev
+   ```
 
-| Layer | Technology |
-|-------|------------|
-| Frontend | React 18, Vite, React Router v6 |
-| Animations | GSAP + ScrollTrigger |
-| HTTP Client | Axios |
-| Styling | CSS Modules + Custom Properties |
-| Backend | Node.js, Express.js |
-| Database | MongoDB + Mongoose (optional) |
-| Dev Tools | Nodemon, Vite proxy |
+The frontend will run on `http://localhost:4500`. Vite is configured to automatically proxy `/api` requests to the backend server.
+
+## Features
+
+- Custom hero animations using GSAP
+- Filterable project gallery
+- Dynamic project detail routing
+- Working contact form with validation
+- Resume download
+- Dark/light mode support
+- Fully responsive layout
+
