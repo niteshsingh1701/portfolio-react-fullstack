@@ -48,60 +48,6 @@
   gap: 16px;
 }
 
-/* ─── Avatar ─── */
-.avatarWrap {
-  position: relative;
-  flex-shrink: 0;
-  width: 340px;
-  height: 340px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.avatarRing {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  border: 3px solid var(--border-primary);
-  background: var(--bg-card-gradient);
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.avatarRing::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  background: var(--gradient);
-  opacity: 0.15;
-}
-
-.avatarInner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-.chip1 {
-  top: 0;
-  right: 0;
-}
-
-.chip2 {
-  bottom: 0;
-  left: 0;
-}
-
 @media (max-width: 900px) {
   .inner {
     flex-direction: column-reverse;
@@ -109,19 +55,18 @@
     gap: 40px;
   }
 
-  .para { margin-left: auto; margin-right: auto; }
+  .para {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .buttons {
     justify-content: center;
   }
+}
 
-  .avatarWrap {
-    width: 260px;
-    height: 260px;
-  }
-
-  .avatarRing {
-    width: 220px;
-    height: 220px;
+@media (max-width: 480px) {
+  .content {
+    max-width: 100%;
   }
 }

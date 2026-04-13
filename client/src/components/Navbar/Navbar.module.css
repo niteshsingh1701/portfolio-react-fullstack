@@ -32,24 +32,16 @@
 .logo {
   font-size: 1.3rem;
   font-weight: 700;
-  background: linear-gradient(to right, #f1f5f9 20%, #a78bfa 50%, #f1f5f9 80%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--secondary);
   letter-spacing: -0.3px;
   flex-shrink: 0;
-  animation: shine 4s linear infinite;
   transition: transform var(--transition);
 }
 
-@keyframes shine {
-  to {
-    background-position: 200% center;
-  }
+.logo:hover {
+  transform: scale(1.05);
+  color: var(--accent);
 }
-
-.logo:hover { transform: scale(1.05); }
 
 .links {
   display: flex;
@@ -66,7 +58,7 @@
 
 .hamburger {
   display: none;
-  background: var(--primary-dim);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   width: 38px;
@@ -79,7 +71,7 @@
   cursor: pointer;
 }
 
-.hamburger:hover { background: rgba(99, 102, 241, 0.2); }
+.hamburger:hover { background: var(--accent-dim); }
 
 .mobileMenu {
   display: flex;
@@ -108,7 +100,7 @@
 
 .mobileLink:hover {
   color: var(--text);
-  background: var(--primary-dim);
+  background: var(--accent-dim);
 }
 
 @media (max-width: 768px) {

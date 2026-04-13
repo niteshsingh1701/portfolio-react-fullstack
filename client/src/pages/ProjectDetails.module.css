@@ -29,7 +29,7 @@
   font-size: 5rem;
   line-height: 1;
   flex-shrink: 0;
-  filter: drop-shadow(0 8px 20px rgba(99, 102, 241, 0.3));
+  filter: drop-shadow(0 10px 22px rgba(180, 91, 99, 0.24));
 }
 
 .categoryBadge {
@@ -74,7 +74,7 @@
 }
 
 .sectionTitle i {
-  color: var(--primary);
+  color: var(--accent);
 }
 
 .tags {
@@ -102,6 +102,7 @@
 }
 
 .featureItem:hover { border-color: var(--primary); }
+.featureItem:hover { border-color: var(--border-primary); }
 
 .links {
   display: flex;
