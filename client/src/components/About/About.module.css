@@ -19,7 +19,7 @@
 }
 
 .cardAccent {
-  background: var(--bg-card-gradient);
+  background: var(--bg-card);
   border-color: var(--border-primary);
   box-shadow: var(--shadow-glow);
 }
@@ -28,7 +28,7 @@
   width: 52px;
   height: 52px;
   border-radius: var(--radius-md);
-  background: var(--gradient);
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;

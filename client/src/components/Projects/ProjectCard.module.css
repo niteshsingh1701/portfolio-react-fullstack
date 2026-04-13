@@ -1,6 +1,6 @@
 .banner {
   height: 160px;
-  background: var(--bg-card-gradient);
+  background: var(--bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
 
 .emoji {
   font-size: 4rem;
-  filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.4));
+  filter: drop-shadow(0 6px 16px rgba(180, 91, 99, 0.22));
 }
 
 .info {
@@ -46,7 +46,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   text-align: center;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 16px;
 }
 
@@ -61,7 +61,7 @@
 
 .features li {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-muted);
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -91,14 +91,14 @@
 }
 
 .liveBtn {
-  background: #fff;
-  color: #1e293b;
+  background: var(--primary);
+  color: var(--bg);
 }
 
 .detailBtn {
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: var(--bg-secondary);
+  color: var(--text);
+  border: 1px solid var(--border-primary);
 }
 
 .liveBtn:hover,

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import styles from "./Hero.module.css";
+import HeroVisual from "./HeroVisual/HeroVisual";
 
 const ROLES = [
     "Frontend Developer",
@@ -17,7 +18,6 @@ const Hero = () => {
     const h2Ref = useRef(null);
     const paraRef = useRef(null);
     const btnsRef = useRef(null);
-    const avatarRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -27,8 +27,7 @@ const Hero = () => {
                 .from(h1Ref.current, { y: 40, opacity: 0, duration: 0.8 }, "-=0.3")
                 .from(h2Ref.current, { y: 30, opacity: 0, duration: 0.7 }, "-=0.4")
                 .from(paraRef.current, { y: 25, opacity: 0, duration: 0.7 }, "-=0.4")
-                .from(btnsRef.current.children, { y: 20, opacity: 0, stagger: 0.15, duration: 0.6 }, "-=0.4")
-                .from(avatarRef.current, { scale: 0.8, opacity: 0, duration: 0.9, ease: "back.out(1.7)" }, "-=0.8");
+                .from(btnsRef.current.children, { y: 20, opacity: 0, stagger: 0.15, duration: 0.6 }, "-=0.4");
         }, heroRef);
 
         return () => ctx.revert();
@@ -87,24 +86,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-                {/* Right: Avatar */}
-                <div className={styles.avatarWrap} ref={avatarRef}>
-                    <div className={styles.avatarRing}>
-                        <div className={styles.avatarInner}>
-                            <i className="fas fa-code" style={{ fontSize: "4rem", color: "var(--primary)" }} />
-                        </div>
-                    </div>
-
-                    {/* Stat Chips */}
-                    <div className={`stat-chip ${styles.chip1} floating`}>
-                        <span className="stat-num">2+</span>
-                        <span className="stat-label">Years Exp.</span>
-                    </div>
-                    <div className={`stat-chip ${styles.chip2} floating-delayed`}>
-                        <span className="stat-num">20+</span>
-                        <span className="stat-label">Projects</span>
-                    </div>
-                </div>
+                <HeroVisual />
             </div>
         </section>
     );

@@ -5,8 +5,8 @@
 }
 
 .skill-tag.core {
-  border: 1px solid #6366f1;
-  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid var(--border-primary);
+  background: rgba(122, 139, 99, 0.12);
   font-weight: 500;
 }
 
