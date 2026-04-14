@@ -1,15 +1,43 @@
+.card {
+  border-radius: 20px 15px 23px 17px;
+  transform-origin: center;
+  transition: transform var(--transition), filter var(--transition);
+}
+
+.inner {
+  border-radius: inherit;
+}
+
+.front,
+.back {
+  border-radius: 20px 15px 23px 17px;
+  border: 2px solid var(--border-primary);
+  box-shadow: 6px 6px 0 var(--border);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px) rotate(-0.75deg);
+}
+
+.card:hover .front,
+.card:hover .back {
+  box-shadow: 3px 3px 0 var(--border);
+}
+
 .banner {
   height: 160px;
   background: var(--bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--border-primary);
+  border-radius: 18px 13px 0 0;
 }
 
 .emoji {
   font-size: 4rem;
-  filter: drop-shadow(0 6px 16px rgba(180, 91, 99, 0.22));
+  filter: drop-shadow(2px 2px 0 var(--border-primary));
 }
 
 .info {
@@ -39,6 +67,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.card :global(.tech-badge) {
+  border: 2px solid var(--border);
+  border-radius: 12px 7px 13px 9px;
+  background: var(--bg-secondary);
+  box-shadow: 2px 2px 0 var(--border);
 }
 
 /* ─── Back ─── */
@@ -80,10 +115,12 @@
   flex: 1;
   text-align: center;
   padding: 9px 14px;
-  border-radius: var(--radius-full);
+  border-radius: 999px 10px 14px 999px;
   font-size: 0.82rem;
   font-weight: 600;
-  transition: transform var(--transition), opacity var(--transition);
+  border: 2px solid var(--border-primary);
+  box-shadow: 3px 3px 0 var(--border);
+  transition: transform var(--transition), opacity var(--transition), box-shadow var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,11 +135,17 @@
 .detailBtn {
   background: var(--bg-secondary);
   color: var(--text);
-  border: 1px solid var(--border-primary);
 }
 
 .liveBtn:hover,
 .detailBtn:hover {
-  opacity: 0.9;
+  opacity: 0.96;
   transform: translateY(-2px);
+  box-shadow: 1px 1px 0 var(--border);
+}
+
+@media (max-width: 600px) {
+  .card:hover {
+    transform: translateY(-3px) rotate(-0.45deg);
+  }
 }

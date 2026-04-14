@@ -5,10 +5,10 @@ const ProjectCard = ({ project }) => {
     const { _id, emoji, title, description, techStack, features, liveUrl } = project;
 
     return (
-        <div className="project-card">
-            <div className="project-inner">
+        <div className={`project-card ${styles.card}`}>
+            <div className={`project-inner ${styles.inner}`}>
                 {/* ─── Front ─── */}
-                <div className="project-front">
+                <div className={`project-front ${styles.front}`}>
                     {/* Emoji banner */}
                     <div className={styles.banner}>
                         <span className={styles.emoji}>{emoji}</span>
@@ -30,7 +30,7 @@ const ProjectCard = ({ project }) => {
                 </div>
 
                 {/* ─── Back ─── */}
-                <div className="project-back">
+                <div className={`project-back ${styles.back}`}>
                     <h3 className={styles.backTitle}>{title}</h3>
                     <ul className={styles.features}>
                         {features?.slice(0, 5).map((f, i) => (

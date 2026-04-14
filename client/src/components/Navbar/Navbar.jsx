@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Shuffle from "../shared/Shuffle";
 import ThemeToggle from "../shared/ThemeToggle";
 import styles from "./Navbar.module.css";
 
@@ -44,7 +45,7 @@ const Navbar = () => {
                 <div className={styles.container}>
                     {/* Logo */}
                     <Link to="/" className={styles.logo}>
-                        Nitesh Singh
+                        <Shuffle text="Nitesh Singh" className={styles.logoText} />
                     </Link>
 
                     {/* Desktop Links */}

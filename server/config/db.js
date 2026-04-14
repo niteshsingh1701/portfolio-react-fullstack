@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 
 let isConnected = false;
+const ENABLE_MONGO = process.env.ENABLE_MONGO === "true";
 
 const connectDB = async () => {
+  if (!ENABLE_MONGO) {
+    console.warn(
+      "⚠️  MongoDB connection disabled (ENABLE_MONGO=false) — running with in-memory fallback"
+    );
+    return;
+  }
+
   if (!process.env.MONGO_URI) {
     console.warn(
       "⚠️  MONGO_URI not set — running with in-memory fallback (no persistence)"

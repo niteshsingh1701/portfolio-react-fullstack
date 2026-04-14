@@ -1,3 +1,22 @@
+.projectsSection {
+  position: relative;
+}
+
+.projectsContainer {
+  position: relative;
+}
+
+.sectionHeader :global(h2) {
+  display: inline-block;
+  transform: rotate(-0.35deg);
+}
+
+.sectionHeader :global(.section-divider) {
+  width: 92px;
+  height: 4px;
+  border-radius: 999px 7px 11px 999px;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -8,32 +27,35 @@
 
 .filterBtn {
   padding: 8px 22px;
-  border-radius: var(--radius-full);
+  border-radius: 999px 14px 20px 999px;
   font-size: 0.875rem;
   font-weight: 500;
   background: var(--bg-secondary);
-  border: 1.5px solid var(--border);
+  border: 2px solid var(--border-primary);
   color: var(--text-muted);
-  transition: all var(--transition);
+  box-shadow: 4px 4px 0 var(--border);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), color var(--transition), background var(--transition);
   cursor: pointer;
 }
 
 .filterBtn:hover {
   border-color: var(--primary);
-  color: var(--primary);
+  color: var(--text);
+  transform: translateY(-2px) rotate(-0.45deg);
+  box-shadow: 2px 2px 0 var(--border);
 }
 
 .filterBtn.active {
-  background: var(--gradient);
-  border-color: transparent;
-  color: #fff;
-  box-shadow: var(--shadow-glow);
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--bg);
+  box-shadow: 3px 3px 0 var(--border-primary);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 28px;
   margin-bottom: 40px;
 }
 

@@ -58,9 +58,10 @@ const About = () => {
     }, []);
 
     return (
-        <section id="about" className="section" ref={sectionRef}>
-            <div className="container">
-                <div className="section-header">
+        <section id="about" className={`section ${styles.aboutSection}`} ref={sectionRef}>
+            <div className={`container ${styles.aboutContainer}`}>
+                <div className={`section-header ${styles.sectionHeader}`}>
+                    <span className={styles.eyebrow}>Who I am</span>
                     <h2>About Me</h2>
                     <div className="section-divider" />
                 </div>

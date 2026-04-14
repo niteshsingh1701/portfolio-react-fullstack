@@ -1,0 +1,39 @@
+.shuffle {
+  display: inline-block;
+  white-space: nowrap;
+  font: inherit;
+  letter-spacing: inherit;
+  color: transparent;
+  background-image: linear-gradient(
+    110deg,
+    var(--primary) 0%,
+    var(--text) 26%,
+    var(--secondary) 52%,
+    var(--text) 74%,
+    var(--primary) 100%
+  );
+  background-size: 240% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  will-change: background-position;
+  animation: logoWaveGradient 8s ease-in-out infinite;
+}
+
+.shuffle:hover,
+.shuffle:focus-visible {
+  animation-duration: 5.5s;
+}
+
+@keyframes logoWaveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
