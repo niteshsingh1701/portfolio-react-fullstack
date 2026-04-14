@@ -15,6 +15,8 @@ const projectSchema = new mongoose.Schema(
       enum: ["React", "WordPress", "HTML/CSS", "Full-Stack"],
       default: ["React"],
     },
+    // Lower number means higher priority in project listing.
+    priority: { type: Number, default: 999, index: true },
     featured: { type: Boolean, default: false },
   },
   { timestamps: true }

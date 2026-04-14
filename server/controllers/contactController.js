@@ -3,6 +3,18 @@ const { getIsConnected } = require("../config/db");
 const fs = require("fs");
 const path = require("path");
 
+const CONTACT_STORAGE_MODE = (
+  process.env.CONTACT_STORAGE_MODE || "auto"
+).toLowerCase();
+
+const shouldUseMongoForContact = () => {
+  if (CONTACT_STORAGE_MODE === "mongo") return getIsConnected();
+  if (CONTACT_STORAGE_MODE === "local") return false;
+
+  // auto: use Mongo only in production when DB is connected.
+  return process.env.NODE_ENV === "production" && getIsConnected();
+};
+
 // In-memory / file-based fallback store
 const inMemoryMessages = [];
 const MESSAGES_FILE = path.join(__dirname, "../data/messages.json");
@@ -41,7 +53,7 @@ const submitContact = async (req, res) => {
   }
 
   try {
-    if (getIsConnected()) {
+    if (shouldUseMongoForContact()) {
       const newMessage = await ContactMessage.create({
         name: name.trim(),
         email: email.trim().toLowerCase(),
@@ -82,4 +94,25 @@ const submitContact = async (req, res) => {
   }
 };
 
-module.exports = { submitContact };
+// GET /api/contact/messages
+const getContactMessages = async (req, res) => {
+  try {
+    if (shouldUseMongoForContact()) {
+      const messages = await ContactMessage.find().sort({ createdAt: -1 });
+      return res.json({ success: true, count: messages.length, data: messages });
+    }
+
+    const sorted = [...inMemoryMessages].sort(
+      (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+    );
+
+    return res.json({ success: true, count: sorted.length, data: sorted });
+  } catch (err) {
+    console.error("getContactMessages error:", err.message);
+    return res
+      .status(500)
+      .json({ success: false, message: "Server error fetching messages" });
+  }
+};
+
+module.exports = { submitContact, getContactMessages };

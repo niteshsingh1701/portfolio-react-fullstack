@@ -5,31 +5,35 @@ const { projects } = require("../data/projects");
 
 const seedProjects = async () => {
   if (!process.env.MONGO_URI) {
-    console.error("❌ MONGO_URI not set in .env — cannot seed database.");
+    console.error("MONGO_URI not set in .env — cannot seed database.");
     console.log(
-      "ℹ️  Set MONGO_URI=mongodb://localhost:27017/portfolio in server/.env and retry."
+      "Set MONGO_URI=mongodb://localhost:27017/portfolio in server/.env and retry."
     );
     process.exit(1);
   }
 
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("✅ MongoDB connected for seeding");
+    console.log("MongoDB connected for seeding");
 
     await Project.deleteMany({});
-    console.log("🗑️  Cleared existing projects");
+    console.log("Cleared existing projects");
 
-    // Remove the _id field so Mongoose auto-generates ObjectIds
-    const projectsToInsert = projects.map(({ _id, ...rest }) => rest);
+    // Remove in-memory _id and normalize fields to schema shape.
+    const projectsToInsert = projects.map(({ _id, category, priority, ...rest }, index) => ({
+      ...rest,
+      category: Array.isArray(category) ? category : [category],
+      priority: Number.isFinite(priority) ? priority : index + 1,
+    }));
     const inserted = await Project.insertMany(projectsToInsert);
-    console.log(`✅ Seeded ${inserted.length} projects successfully`);
+    console.log(`Seeded ${inserted.length} projects successfully`);
 
     inserted.forEach((p) => console.log(`   ${p.emoji}  ${p.title} → ${p._id}`));
   } catch (err) {
-    console.error("❌ Seeding failed:", err.message);
+    console.error("Seeding failed:", err.message);
   } finally {
     await mongoose.disconnect();
-    console.log("🔌 MongoDB disconnected");
+    console.log("MongoDB disconnected");
     process.exit(0);
   }
 };
