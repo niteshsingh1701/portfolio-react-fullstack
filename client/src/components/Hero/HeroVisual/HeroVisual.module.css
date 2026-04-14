@@ -192,13 +192,13 @@
 }
 
 .centerText {
-  font-size: 1.02rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--visual-frame-text);
 }
 
 .centerSubtext {
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   color: var(--visual-frame-muted);
   max-width: 180px;
 }
