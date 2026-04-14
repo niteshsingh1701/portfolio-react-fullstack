@@ -71,9 +71,10 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className={`section section-alt`}>
-            <div className="container">
-                <div className="section-header">
+        <section id="contact" className={`section section-alt ${styles.contactSection}`}>
+            <div className={`container ${styles.contactContainer}`}>
+                <div className={`section-header ${styles.sectionHeader}`}>
+                    <span className={styles.eyebrow}>Let's Connect</span>
                     <h2>Get In Touch</h2>
                     <div className="section-divider" />
                 </div>
@@ -196,8 +197,8 @@ const Contact = () => {
                                 </div>
                             )}
 
-                            <form onSubmit={handleSubmit} noValidate>
-                                <div className="form-group">
+                            <form onSubmit={handleSubmit} noValidate className={styles.formSketch}>
+                                <div className={`form-group ${styles.formGroup}`}>
                                     <label htmlFor="contact-name">Your Name</label>
                                     <input
                                         id="contact-name"
@@ -206,13 +207,13 @@ const Contact = () => {
                                         placeholder="John Doe"
                                         value={form.name}
                                         onChange={handleChange}
-                                        className={errors.name ? "error" : ""}
+                                        className={`${styles.formInput} ${errors.name ? "error" : ""}`}
                                         autoComplete="name"
                                     />
                                     {errors.name && <span className="form-error-msg">{errors.name}</span>}
                                 </div>
 
-                                <div className="form-group">
+                                <div className={`form-group ${styles.formGroup}`}>
                                     <label htmlFor="contact-email">Email Address</label>
                                     <input
                                         id="contact-email"
@@ -221,13 +222,13 @@ const Contact = () => {
                                         placeholder="john@example.com"
                                         value={form.email}
                                         onChange={handleChange}
-                                        className={errors.email ? "error" : ""}
+                                        className={`${styles.formInput} ${errors.email ? "error" : ""}`}
                                         autoComplete="email"
                                     />
                                     {errors.email && <span className="form-error-msg">{errors.email}</span>}
                                 </div>
 
-                                <div className="form-group">
+                                <div className={`form-group ${styles.formGroup}`}>
                                     <label htmlFor="contact-message">Message</label>
                                     <textarea
                                         id="contact-message"
@@ -236,16 +237,15 @@ const Contact = () => {
                                         placeholder="Tell me about your project or opportunity..."
                                         value={form.message}
                                         onChange={handleChange}
-                                        className={errors.message ? "error" : ""}
+                                        className={`${styles.formTextarea} ${errors.message ? "error" : ""}`}
                                     />
                                     {errors.message && <span className="form-error-msg">{errors.message}</span>}
                                 </div>
 
                                 <button
                                     type="submit"
-                                    className="gradient-btn"
+                                    className={`gradient-btn ${styles.formSubmit}`}
                                     disabled={status === "loading"}
-                                    style={{ width: "100%", justifyContent: "center" }}
                                 >
                                     {status === "loading" ? (
                                         <><i className="fas fa-spinner fa-spin" /> Sending...</>

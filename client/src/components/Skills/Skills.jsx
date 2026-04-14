@@ -35,9 +35,10 @@ const TOOL_SKILLS = [
 
 const Skills = () => {
     return (
-        <section id="skills" className="section section-alt">
-            <div className="container">
-                <div className="section-header">
+        <section id="skills" className={`section section-alt ${styles.skillsSection}`}>
+            <div className={`container ${styles.skillsContainer}`}>
+                <div className={`section-header ${styles.sectionHeader}`}>
+                    <span className={styles.eyebrow}>Skill Notebook</span>
                     <h2>Skills & Expertise</h2>
                     <div className="section-divider" />
                 </div>

@@ -27,6 +27,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  position: relative;
 }
 
 .logo {
@@ -35,12 +36,22 @@
   color: var(--secondary);
   letter-spacing: -0.3px;
   flex-shrink: 0;
-  transition: transform var(--transition);
+  transition: color var(--transition);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .logo:hover {
-  transform: scale(1.05);
   color: var(--accent);
+}
+
+.logoText {
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
 }
 
 .links {
@@ -59,19 +70,24 @@
 .hamburger {
   display: none;
   background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  width: 38px;
-  height: 38px;
+  border: 2px solid var(--border-primary);
+  border-radius: 14px 9px 15px 11px;
+  width: 42px;
+  height: 42px;
   align-items: center;
   justify-content: center;
   color: var(--text);
   font-size: 1rem;
-  transition: background var(--transition);
+  box-shadow: 3px 3px 0 var(--border);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
   cursor: pointer;
 }
 
-.hamburger:hover { background: var(--accent-dim); }
+.hamburger:hover {
+  background: rgba(244, 234, 216, 0.06);
+  transform: translateY(-1px) rotate(-0.5deg);
+  box-shadow: 2px 2px 0 var(--border);
+}
 
 .mobileMenu {
   display: flex;
@@ -94,13 +110,16 @@
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-muted);
-  border-radius: var(--radius-sm);
-  transition: color var(--transition), background var(--transition);
+  border-radius: 10px 6px 12px 8px;
+  border: 1.5px solid transparent;
+  transition: color var(--transition), background var(--transition), border-color var(--transition), transform var(--transition);
 }
 
 .mobileLink:hover {
   color: var(--text);
-  background: var(--accent-dim);
+  background: rgba(180, 91, 99, 0.08);
+  border-color: var(--border-primary);
+  transform: translateX(2px);
 }
 
 @media (max-width: 768px) {
