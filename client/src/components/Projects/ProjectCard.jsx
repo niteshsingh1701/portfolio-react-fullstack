@@ -1,11 +1,23 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./ProjectCard.module.css";
 
 const ProjectCard = ({ project }) => {
     const { _id, emoji, title, description, techStack, features, liveUrl } = project;
+    const [flipped, setFlipped] = useState(false);
+
+    // Only toggle flip on touch devices (mobile)
+    const handleClick = (e) => {
+        // If the click is on a link/button inside, don't flip
+        if (e.target.closest("a") || e.target.closest("button")) return;
+        setFlipped((prev) => !prev);
+    };
 
     return (
-        <div className={`project-card ${styles.card}`}>
+        <div
+            className={`project-card ${styles.card} ${flipped ? styles.flipped : ""}`}
+            onClick={handleClick}
+        >
             <div className={`project-inner ${styles.inner}`}>
                 {/* ─── Front ─── */}
                 <div className={`project-front ${styles.front}`}>

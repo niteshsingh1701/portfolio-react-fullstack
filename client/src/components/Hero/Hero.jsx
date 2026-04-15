@@ -73,14 +73,17 @@ const Hero = () => {
 
           <div ref={btnsRef} className={styles.buttons}>
             <button
-              className="gradient-btn"
+              className={`gradient-btn ${styles.ctaPrimary}`}
               onClick={() => scrollTo("projects")}
             >
-              <i className="fas fa-folder-open" />
+              <i className={`${styles.ctaIcon} fas fa-folder-open`} />
               View Projects
             </button>
-            <button className="outline-btn" onClick={() => scrollTo("contact")}>
-              <i className="fas fa-paper-plane" />
+            <button
+              className={`outline-btn ${styles.ctaSecondary}`}
+              onClick={() => scrollTo("contact")}
+            >
+              <i className={`${styles.ctaIcon} fas fa-paper-plane`} />
               Contact Me
             </button>
           </div>
