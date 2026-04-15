@@ -48,6 +48,41 @@
   gap: 16px;
 }
 
+.ctaPrimary,
+.ctaSecondary {
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 999px 14px 20px 999px;
+  box-shadow: 4px 4px 0 var(--border);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition),
+    filter var(--transition);
+}
+
+.ctaPrimary {
+  border-color: rgba(244, 234, 216, 0.16);
+}
+
+.ctaSecondary {
+  border-color: var(--border-primary);
+  box-shadow: 4px 4px 0 var(--border);
+  border-radius: 0 999px 999px 0;
+}
+
+.ctaPrimary:hover,
+.ctaSecondary:hover {
+  transform: translateY(-2px) rotate(-0.45deg);
+  box-shadow: 2px 2px 0 var(--border);
+  filter: saturate(1.02);
+}
+
+.ctaIcon {
+  font-size: 0.95em;
+  transform: translateY(-1px);
+}
+
 @media (max-width: 900px) {
   .inner {
     flex-direction: column-reverse;

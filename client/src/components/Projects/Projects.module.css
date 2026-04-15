@@ -70,10 +70,92 @@
   text-align: center;
 }
 
+/* ─── Mobile Carousel ─── */
+.carouselWrapper {
+  display: none;
+}
+
+.carousel {
+  display: flex;
+  gap: 16px;
+  padding: 4px 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel > * {
+  scroll-snap-align: start;
+  flex: 0 0 78vw;
+  max-width: 320px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0 20px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border-primary);
+  transition: width var(--transition), border-radius var(--transition), background var(--transition);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.dot.activeDot {
+  width: 20px;
+  border-radius: 999px;
+  background: var(--primary);
+}
+
 @media (max-width: 1024px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 600px) {
-  .grid { grid-template-columns: 1fr; }
+  /* Hide desktop grid, show carousel */
+  .grid {
+    display: none;
+  }
+
+  .carouselWrapper {
+    display: block;
+    margin: 0 -20px; /* bleed to screen edges for that native feel */
+  }
+
+  /* Tighten filter row on mobile — horizontal scroll, no wrap */
+  .filters {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    margin-bottom: 28px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filterBtn {
+    flex-shrink: 0;
+  }
+
+  .desktopOnly {
+    display: none;
+  }
 }

@@ -144,8 +144,22 @@
   box-shadow: 1px 1px 0 var(--border);
 }
 
+/* ─── Desktop utility ─── */
+.desktopOnly {
+  display: block;
+}
+
 @media (max-width: 600px) {
   .card:hover {
     transform: translateY(-3px) rotate(-0.45deg);
+  }
+
+  /* Tap-to-flip on mobile */
+  .card.flipped .inner {
+    transform: rotateY(180deg);
+  }
+
+  .desktopOnly {
+    display: none;
   }
 }
