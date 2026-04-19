@@ -44,7 +44,7 @@
 
 .buttons {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 16px;
 }
 
@@ -103,5 +103,16 @@
 @media (max-width: 480px) {
   .content {
     max-width: 100%;
+  }
+
+  .buttons {
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .buttons button {
+    white-space: nowrap;
+    padding: 10px 16px;
+    font-size: 0.86rem;
   }
 }

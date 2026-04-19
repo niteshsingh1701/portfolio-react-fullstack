@@ -25,7 +25,7 @@ const ThemeToggleButton2 = () => {
         if (!buttonRef.current) return;
 
         gsap.to(thumbRef.current, {
-            x: isDark ? 16 : -16,
+            x: isDark ? 30 : 0,
             duration: 0.38,
             ease: "power3.inOut",
         });
