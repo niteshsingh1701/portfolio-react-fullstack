@@ -31,9 +31,9 @@
 .thumb {
   position: absolute;
   left: 5px;
-  top: 4px;
-  width: 30px;
-  height: 30px;
+  top: 9px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--primary);
   box-shadow: none;
@@ -43,6 +43,12 @@
   color: var(--bg);
   will-change: transform;
 }
+
+/* @media (max-width: 480px) {
+  .thumb {
+    top: 9px;
+  }
+} */
 
 .icon {
   width: 18px;
