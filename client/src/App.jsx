@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/shared/ScrollToTop";
@@ -10,6 +12,8 @@ const ProjectDetails = lazy(() => import("./pages/ProjectDetails"));
 function App() {
     return (
         <BrowserRouter>
+            <Analytics />
+            <SpeedInsights />
             <ScrollToTop />
             <Navbar />
             <main>
