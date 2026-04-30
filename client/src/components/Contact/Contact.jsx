@@ -137,7 +137,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <p className={styles.contactLabel}>Location</p>
-                                    <p className={styles.contactVal}>Noida, India</p>
+                                    <p className={styles.contactVal}>Delhi NCR, India</p>
                                 </div>
                             </div>
 
