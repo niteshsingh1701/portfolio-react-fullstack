@@ -223,6 +223,38 @@ const projects = [
     category: "React",
     featured: false,
   },
+  {
+    _id: "12",
+    title: "Altaironara",
+    emoji: "🚀",
+    description:
+      "A modern React-based website for Altaironara, showcasing intelligent platforms for startup ecosystems and educational institutions.",
+    longDescription:
+      "Altaironara is a polished marketing website built to present its ecosystem of digital products, including startup and school management solutions. It features a responsive layout, reusable UI components, React Router-based navigation, content centralized in configuration files, and webhook-powered contact forms for lead capture.",
+    techStack: [
+      "React",
+      "Framer Motion",
+      "Vercel Analytics",
+      "Vercel Speed Insights",
+      "Formspree",
+      "Vite",
+      "React Router",
+      "CSS Modules",
+    ],
+    features: [
+      "Responsive landing page with modern UI sections",
+      "Centralized content architecture for easier updates",
+      "Contact form with validation and Formspree integration",
+      "SPA navigation with React Router",
+      "Legal pages and dedicated thank-you flow",
+      "Performance and analytics integration",
+    ],
+    liveUrl: "https://altaironara.com",
+    githubUrl: "",
+    category: ["React", "Full-Stack"],
+    // priority: 12,
+    featured: true,
+  },
 ];
 
 module.exports = { projects };

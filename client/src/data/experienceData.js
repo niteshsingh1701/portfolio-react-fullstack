@@ -7,7 +7,7 @@ export const experiences = [
     id: 1,
     role: "Front-end Developer",
     company: "Nuvento",
-    client: "Elevest – Grinar Finserv",
+    client: "Elevest – CarDekho Group",
     duration: "Sep 2025 – Present",
     location: "Gurgaon, Haryana",
     type: "Full-time",
