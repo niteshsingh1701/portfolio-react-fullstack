@@ -3,7 +3,7 @@ import styles from "./Footer.module.css";
 
 const Footer = () => {
     const year = new Date().getFullYear();
-    const [quote, setQuote] = useState("Designed and built with 🛠️ caffeine");
+    const [quote, setQuote] = useState("Designed and built with caffeine");
     const [author, setAuthor] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -24,13 +24,8 @@ const Footer = () => {
     };
 
     useEffect(() => {
-        // Fetch quote on mount
         fetchQuote();
-
-        // Set interval to fetch 2 times a day (every 12 hours)
         const intervalId = setInterval(fetchQuote, 12 * 60 * 60 * 1000);
-
-        // Cleanup interval on unmount
         return () => clearInterval(intervalId);
     }, []);
 
