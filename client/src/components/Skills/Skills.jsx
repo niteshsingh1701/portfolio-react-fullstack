@@ -2,6 +2,8 @@ import styles from "./Skills.module.css";
 
 const CORE_SKILLS = [
     { icon: "fab fa-react", label: "React.js" },
+    {icon: "fab fa-js", label: "Next.js"},
+    { icon: "fab fa-node-js", label: "Node.js" },
     { icon: "fab fa-js", label: "JavaScript (ES6+)" },
     { icon: "fas fa-layer-group", label: "Component Architecture" },
     { icon: "fas fa-code-branch", label: "State Management (Redux Toolkit, Context API)" },
@@ -20,7 +22,7 @@ const FRONTEND_SKILLS = [
 ];
 
 const ADDITIONAL_SKILLS = [
-    { icon: "fas fa-server", label: "Node.js (Basics)" },
+    { icon: "fas fa-server", label: "Node.js" },
     { icon: "fas fa-network-wired", label: "REST API Architecture" },
     { icon: "fab fa-wordpress", label: "WordPress Development" },
     { icon: "fas fa-magic", label: "Animations (GSAP, Framer Motion)" },
@@ -30,6 +32,7 @@ const TOOL_SKILLS = [
     { icon: "fab fa-git-alt", label: "Git" },
     { icon: "fab fa-github", label: "GitHub" },
     { icon: "fas fa-tools", label: "Chrome DevTools" },
+    { icon: "fas fa-tools", label: "Lighthouse" },
     { icon: "fas fa-tasks", label: "Jira / Agile Workflow" },
 ];
 
