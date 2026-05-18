@@ -9,6 +9,7 @@ const CORE_SKILLS = [
     { icon: "fas fa-code-branch", label: "State Management (Redux Toolkit, Context API)" },
     { icon: "fas fa-plug", label: "API Integration & Data Handling" },
     { icon: "fas fa-chart-line", label: "Dashboard & Data-Driven UI" },
+    { icon: "fas fa-magic", label: "Animations (GSAP, Framer Motion)" },
 ];
 
 const FRONTEND_SKILLS = [
@@ -21,11 +22,11 @@ const FRONTEND_SKILLS = [
     { icon: "fas fa-tachometer-alt", label: "Performance Optimization" },
 ];
 
-const ADDITIONAL_SKILLS = [
-    { icon: "fas fa-server", label: "Node.js" },
-    { icon: "fas fa-network-wired", label: "REST API Architecture" },
-    { icon: "fab fa-wordpress", label: "WordPress Development" },
-    { icon: "fas fa-magic", label: "Animations (GSAP, Framer Motion)" },
+const AI_SKILLS = [
+    { icon: "fas fa-brain", label: "Claude AI - Development & Problem Solving" },
+    { icon: "fab fa-github", label: "GitHub Copilot - Code Generation" },
+    { icon: "fas fa-comments", label: "Prompt Engineering - AI Workflows" },
+    { icon: "fas fa-rocket", label: "AI-Powered Prototyping & Rapid Iteration" },
 ];
 
 const TOOL_SKILLS = [
@@ -74,11 +75,11 @@ const Skills = () => {
                         </div>
                     </div>
 
-                    {/* ADDITIONAL */}
+                    {/* AI & PRODUCTIVITY */}
                     <div className={styles.group}>
-                        <h3 className={styles.groupTitle}>Additional Skills</h3>
+                        <h3 className={styles.groupTitle}>AI & Productivity</h3>
                         <div className={styles.tags}>
-                            {ADDITIONAL_SKILLS.map((s) => (
+                            {AI_SKILLS.map((s) => (
                                 <span key={s.label} className="skill-tag">
                                     <i className={s.icon} />
                                     {s.label}
