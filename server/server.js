@@ -4,7 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
-const { connectDB } = require("./config/db");
+const { connectDB, getIsConnected } = require("./config/db");
 
 // Route imports
 const projectRoutes = require("./routes/projectRoutes");
@@ -59,6 +59,15 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    service: "portfolio-backend",
+    uptimeSeconds: Math.round(process.uptime()),
+    timestamp: new Date().toISOString(),
+    dbConnected: Boolean(getIsConnected()),
+  });
+});
 // ─── API Routes ────────────────────────────────────────────────────────────────
 app.use("/api/projects", projectRoutes);
 app.use("/api/contact", contactRoutes);
