@@ -1,72 +1,28 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./ProjectCard.module.css";
 
 const ProjectCard = ({ project }) => {
-    const { _id, emoji, title, description, techStack, features, liveUrl } = project;
-    const [flipped, setFlipped] = useState(false);
-
-    // Only toggle flip on touch devices (mobile)
-    const handleClick = (e) => {
-        // If the click is on a link/button inside, don't flip
-        if (e.target.closest("a") || e.target.closest("button")) return;
-        setFlipped((prev) => !prev);
-    };
+    const { _id, title, category, description } = project;
+    
+    // Placeholder image mapping based on category or ID
+    const placeholderImg = `https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop`;
 
     return (
-        <div
-            className={`project-card ${styles.card} ${flipped ? styles.flipped : ""}`}
-            onClick={handleClick}
-        >
-            <div className={`project-inner ${styles.inner}`}>
-                {/* ─── Front ─── */}
-                <div className={`project-front ${styles.front}`}>
-                    {/* Emoji banner */}
-                    <div className={styles.banner}>
-                        <span className={styles.emoji}>{emoji}</span>
-                    </div>
-                    <div className={styles.info}>
+        <Link to={`/project/${_id}`} className={styles.card}>
+            <div className={styles.imageWrapper}>
+                <img src={placeholderImg} alt={title} className={styles.image} />
+                <div className={styles.overlay}>
+                    <div className={styles.content}>
+                        <span className={styles.category}>
+                            {Array.isArray(category) ? category[0] : category}
+                        </span>
                         <h3 className={styles.title}>{title}</h3>
                         <p className={styles.desc}>{description}</p>
-                        <div className={styles.tags}>
-                            {techStack?.slice(0, 4).map((tech) => (
-                                <span key={tech} className="tech-badge">
-                                    {tech}
-                                </span>
-                            ))}
-                            {techStack?.length > 4 && (
-                                <span className="tech-badge">+{techStack.length - 4}</span>
-                            )}
-                        </div>
-                    </div>
-                </div>
-
-                {/* ─── Back ─── */}
-                <div className={`project-back ${styles.back}`}>
-                    <h3 className={styles.backTitle}>{title}</h3>
-                    <ul className={styles.features}>
-                        {features?.slice(0, 5).map((f, i) => (
-                            <li key={i}>{f}</li>
-                        ))}
-                    </ul>
-                    <div className={styles.backActions}>
-                        {liveUrl && (
-                            <a
-                                href={liveUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={styles.liveBtn}
-                            >
-                                <i className="fas fa-external-link-alt" /> View Live
-                            </a>
-                        )}
-                        <Link to={`/project/${_id}`} className={styles.detailBtn}>
-                            <i className="fas fa-info-circle" /> Details
-                        </Link>
+                        <span className={styles.cta}>View Case Study</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

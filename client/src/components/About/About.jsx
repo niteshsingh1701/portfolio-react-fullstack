@@ -1,84 +1,89 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef, useState } from "react";
 import styles from "./About.module.css";
 
-gsap.registerPlugin(ScrollTrigger);
+// Import new editorial assets
+import experienceSvg from "../../assets/Experience.svg";
+import craftSvg from "../../assets/Craft.svg";
+import philosophySvg from "../../assets/Philosophy.svg";
 
-const CARDS = [
+const CONTENT = [
     {
-        icon: "fas fa-briefcase",
-        title: "Experience",
-        body1:
-            "Frontend developer with 2+ years of experience building scalable web applications using modern JavaScript frameworks like React and similar ecosystems.",
-        body2:
-            "Worked on a fintech platform developing dashboards, onboarding flows, and handling complex financial data through APIs, with a strong focus on performance and maintainable architecture.",
-        accent: false,
+        tag: "01",
+        title: "The Experience",
+        body: "With over 2 years in the frontend landscape, I specialize in architecting scalable web applications. My journey is defined by a commitment to performance and maintainable codebases.",
+        subBody: "I've navigated complex fintech ecosystems, developing high-stakes dashboards and onboarding flows where precision and security are paramount.",
+        image: experienceSvg
     },
     {
-        icon: "fas fa-laptop-code",
-        title: "What I Build",
-        body1:
-            "I specialize in building data-driven interfaces like dashboards, charts, and user workflows that require clean architecture and efficient state management.",
-        body2:
-            "My focus is on performance, reusability, and delivering production-grade UI.",
-        accent: true,
+        tag: "02",
+        title: "The Craft",
+        body: "I build more than just interfaces; I build data-driven workflows. From dynamic charts to complex state management, my focus is on production-grade UI that feels alive.",
+        subBody: "Every pixel is intentional, every interaction is a chance to provide value and delight the user.",
+        image: craftSvg
     },
     {
-        icon: "fas fa-users",
-        title: "How I Work",
-        body1:
-            "I translate Figma designs into responsive, pixel-perfect UI and collaborate closely with backend teams to understand API structures.",
-        body2:
-            "I focus on writing clean, maintainable code and optimizing performance for real-world usage and scale.",
-        accent: false,
-    },
+        tag: "03",
+        title: "The Philosophy",
+        body: "Design and development are not separate—they are a single narrative. I translate complex Figma designs into high-performance React systems with zero compromise on quality.",
+        subBody: "Collaboration and clean architecture are the foundations of my workflow, ensuring long-term project success.",
+        image: philosophySvg
+    }
 ];
 
 const About = () => {
+    const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
-    const cardsRef = useRef([]);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            cardsRef.current.forEach((card, i) => {
-                if (!card) return;
-                gsap.from(card, {
-                    scrollTrigger: { trigger: card, start: "top 88%" },
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: i * 0.15,
-                    ease: "power3.out",
-                });
-            });
-        }, sectionRef);
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setIsVisible(true);
+                observer.unobserve(entries[0].target);
+            }
+        }, { threshold: 0.05 });
 
-        return () => ctx.revert();
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
     }, []);
 
     return (
-        <section id="about" className={`section ${styles.aboutSection}`} ref={sectionRef}>
+        <section 
+            id="about" 
+            className={`section ${styles.aboutSection} ${isVisible ? styles.isVisible : ""}`} 
+            ref={sectionRef}
+        >
             <div className={`container ${styles.aboutContainer}`}>
-                <div className={`section-header ${styles.sectionHeader}`}>
-                    <span className={styles.eyebrow}>Who I am</span>
-                    <h2>About Me</h2>
-                    <div className="section-divider" />
+                <div className={styles.header}>
+                    <span className={styles.eyebrow}>The Narrative</span>
+                    <h2 className={styles.title}>
+                        Blending <span className="serif-font">Aesthetic</span> <br />
+                        with <span className="serif-font">Performance.</span>
+                    </h2>
+                    <div className={styles.divider}></div>
                 </div>
 
-                <div className={styles.grid}>
-                    {CARDS.map((card, i) => (
-                        <div
-                            key={card.title}
-                            ref={(el) => (cardsRef.current[i] = el)}
-                            className={`${styles.card} ${card.accent ? styles.cardAccent : ""}`}
+                <div className={styles.narrativeGrid}>
+                    {CONTENT.map((item, i) => (
+                        <div 
+                            key={item.title} 
+                            className={styles.narrativeItem}
                         >
-                            <div className={styles.iconWrap}>
-                                <i className={card.icon} />
+                            <span className={styles.tag}>{item.tag}</span>
+                            
+                            <div className={styles.itemMain}>
+                                <div className={styles.itemContent}>
+                                    <h3 className={styles.itemTitle}>{item.title}</h3>
+                                    <p className={styles.itemBody}>{item.body}</p>
+                                    <p className={styles.itemSubBody}>{item.subBody}</p>
+                                </div>
+                                
+                                <div className={styles.imageWrapper}>
+                                    <img src={item.image} alt={item.title} className={styles.narrativeImage} />
+                                </div>
                             </div>
-                            <h3 className={styles.cardTitle}>{card.title}</h3>
-                            <p className={styles.cardBody}>{card.body1}</p>
-                            <p className={styles.cardBody}>{card.body2}</p>
                         </div>
                     ))}
                 </div>
