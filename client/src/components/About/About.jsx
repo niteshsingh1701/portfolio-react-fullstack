@@ -81,7 +81,13 @@ const About = () => {
                                 </div>
                                 
                                 <div className={styles.imageWrapper}>
-                                    <img src={item.image} alt={item.title} className={styles.narrativeImage} />
+                                    <img 
+                                        src={item.image} 
+                                        alt={item.title} 
+                                        className={styles.narrativeImage} 
+                                        width="500"
+                                        height="500"
+                                    />
                                 </div>
                             </div>
                         </div>

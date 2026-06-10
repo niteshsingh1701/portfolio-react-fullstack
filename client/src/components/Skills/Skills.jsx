@@ -50,7 +50,13 @@ const Skills = () => {
         >
             {/* Background Visual Asset */}
             <div className={styles.visualWrapper}>
-                <img src={toolsSvg} alt="" className={styles.toolsImage} />
+                <img 
+                    src={toolsSvg} 
+                    alt="" 
+                    className={styles.toolsImage} 
+                    width="500"
+                    height="500"
+                />
             </div>
 
             <div className={`container ${styles.container}`}>

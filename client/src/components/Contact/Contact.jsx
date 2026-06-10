@@ -113,6 +113,7 @@ const Contact = () => {
                             className={styles.resumeBtn} 
                             onClick={handleResumeDownload}
                             disabled={resumeStatus === "loading"}
+                            aria-live="polite"
                         >
                             {resumeStatus === "loading" ? "Fetching Resume..." : "Download Curriculum Vitae"}
                         </button>
@@ -121,61 +122,76 @@ const Contact = () => {
                     {/* Right: Stationery Form */}
                     <div className={styles.formContainer}>
                         {status === "success" ? (
-                            <div className={styles.successMsg}>
+                            <div className={styles.successMsg} role="alert">
                                 <h3 className="serif-font">Thank you.</h3>
                                 <p>Your message has been received. I'll get back to you shortly.</p>
                                 <button className={styles.resetBtn} onClick={() => setStatus(null)}>Send another</button>
                             </div>
                         ) : (
-                            <form onSubmit={handleSubmit} className={styles.form}>
+                            <form onSubmit={handleSubmit} className={styles.form} noValidate>
                                 <div className={styles.formField}>
-                                    <label className={styles.fieldLabel}>Your Name</label>
+                                    <label htmlFor="contact-name" className={styles.fieldLabel}>Your Name</label>
                                     <input
+                                        id="contact-name"
                                         name="name"
                                         type="text"
+                                        autoComplete="name"
                                         value={form.name}
                                         onChange={handleChange}
                                         className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
                                         placeholder="John Doe"
+                                        aria-invalid={errors.name ? "true" : "false"}
+                                        aria-describedby={errors.name ? "name-error" : undefined}
+                                        required
                                     />
-                                    {errors.name && <span className={styles.errorText}>{errors.name}</span>}
+                                    {errors.name && <span id="name-error" className={styles.errorText} role="alert">{errors.name}</span>}
                                 </div>
 
                                 <div className={styles.formField}>
-                                    <label className={styles.fieldLabel}>Email Address</label>
+                                    <label htmlFor="contact-email" className={styles.fieldLabel}>Email Address</label>
                                     <input
+                                        id="contact-email"
                                         name="email"
                                         type="email"
+                                        autoComplete="email"
                                         value={form.email}
                                         onChange={handleChange}
                                         className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
                                         placeholder="john@example.com"
+                                        aria-invalid={errors.email ? "true" : "false"}
+                                        aria-describedby={errors.email ? "email-error" : undefined}
+                                        required
                                     />
-                                    {errors.email && <span className={styles.errorText}>{errors.email}</span>}
+                                    {errors.email && <span id="email-error" className={styles.errorText} role="alert">{errors.email}</span>}
                                 </div>
 
                                 <div className={styles.formField}>
-                                    <label className={styles.fieldLabel}>How can I help you?</label>
+                                    <label htmlFor="contact-message" className={styles.fieldLabel}>How can I help you?</label>
                                     <textarea
+                                        id="contact-message"
                                         name="message"
                                         rows={4}
                                         value={form.message}
                                         onChange={handleChange}
                                         className={`${styles.input} ${errors.message ? styles.inputError : ""}`}
                                         placeholder="Tell me about your project..."
+                                        aria-invalid={errors.message ? "true" : "false"}
+                                        aria-describedby={errors.message ? "message-error" : undefined}
+                                        required
                                     />
-                                    {errors.message && <span className={styles.errorText}>{errors.message}</span>}
+                                    {errors.message && <span id="message-error" className={styles.errorText} role="alert">{errors.message}</span>}
                                 </div>
 
                                 <button 
                                     type="submit" 
                                     className={styles.submitBtn}
                                     disabled={status === "loading"}
+                                    aria-live="polite"
                                 >
                                     {status === "loading" ? "Sending..." : "Submit Inquiry"}
                                 </button>
                                 
-                                {status === "error" && <p className={styles.serverError}>{serverMsg}</p>}
+                                {status === "error" && <p className={styles.serverError} role="alert">{serverMsg}</p>}
                             </form>
                         )}
                     </div>

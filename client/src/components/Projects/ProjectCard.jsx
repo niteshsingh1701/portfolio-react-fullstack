@@ -10,7 +10,13 @@ const ProjectCard = ({ project }) => {
     return (
         <Link to={`/project/${_id}`} className={styles.card}>
             <div className={styles.imageWrapper}>
-                <img src={placeholderImg} alt={title} className={styles.image} />
+                <img 
+                    src={placeholderImg} 
+                    alt={title} 
+                    className={styles.image} 
+                    width="600"
+                    height="400"
+                />
                 <div className={styles.overlay}>
                     <div className={styles.content}>
                         <span className={styles.category}>

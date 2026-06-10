@@ -5,14 +5,18 @@
   transform: translateX(-50%);
   width: 100%;
   z-index: 1000;
-  padding: 24px 0;
-  transition: width 0.5s var(--transition), top 0.5s var(--transition), padding 0.5s var(--transition);
+  padding: 32px 0;
+  /* Use a more premium, slow-in slow-out transition */
+  transition: 
+    width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    top 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header.scrolled {
-  top: 20px;
-  width: 90%;
-  max-width: 1100px;
+  top: 24px;
+  width: 95%; /* Less compressed */
+  max-width: 1300px; /* Better alignment with 1400px content */
   padding: 0;
 }
 
@@ -20,39 +24,45 @@
   width: 100%;
   background: transparent;
   border: 1px solid transparent;
-  transition: all 0.5s var(--transition);
+  transition: 
+    background 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    border 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header.scrolled .nav {
-  background: #ffffff; 
+  background: rgba(255, 255, 255, 0.98); 
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-full);
-  box-shadow: var(--shadow-premium);
-  padding: 12px 0;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+  padding: 14px 0;
 }
 
 :global([data-theme="dark"]) .header.scrolled .nav {
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(26, 26, 26, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 32px;
+  transition: padding 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header.scrolled .container {
-  padding: 0 32px;
+  padding: 0 40px;
 }
 
 .logo {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 600;
   color: var(--text-primary);
   letter-spacing: -0.02em;
@@ -67,18 +77,24 @@
 .links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 40px;
   list-style: none;
 }
 
 .links :global(.nav-link) {
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
   color: var(--text-secondary);
   position: relative;
   padding: 4px 0;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.links :global(.nav-link:hover) {
+  color: var(--text-primary);
 }
 
 .links :global(.nav-link::after) {
@@ -87,9 +103,9 @@
   bottom: 0;
   left: 0;
   width: 0;
-  height: 1px;
+  height: 1.5px;
   background: var(--text-primary);
-  transition: width var(--transition);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .links :global(.nav-link:hover::after) {
@@ -99,7 +115,7 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 .hamburger {
@@ -111,13 +127,13 @@
   align-items: center;
   justify-content: center;
   color: var(--text-primary);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   cursor: pointer;
 }
 
 .mobileMenu {
   position: absolute;
-  top: calc(100% + 12px);
+  top: calc(100% + 16px);
   left: 0;
   right: 0;
   background: var(--bg-primary);
@@ -126,9 +142,9 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   box-shadow: var(--shadow-premium);
-  animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideIn {
@@ -141,7 +157,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border-subtle);
   transition: all var(--transition);
@@ -156,6 +172,11 @@
   background: var(--bg-secondary);
 }
 
+@media (max-width: 1024px) {
+  .links { gap: 24px; }
+  .container { padding: 0 32px; }
+}
+
 @media (max-width: 850px) {
   .links { display: none; }
   .hamburger { display: flex; }
@@ -168,6 +189,6 @@
   
   .header.scrolled {
     top: 12px;
-    width: 92%;
+    width: 94%;
   }
 }

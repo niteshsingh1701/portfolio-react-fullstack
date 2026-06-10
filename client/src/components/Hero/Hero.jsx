@@ -51,7 +51,13 @@ const Hero = () => {
 
         <div className={styles.visual} ref={visualRef}>
           <div className={styles.imageWrapper}>
-            <img src={heroSvg} alt="Developer Activity" className={styles.heroImg} />
+            <img 
+              src={heroSvg} 
+              alt="Developer Activity" 
+              className={styles.heroImg} 
+              width="800"
+              height="517"
+            />
           </div>
         </div>
       </div>

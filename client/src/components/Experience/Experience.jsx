@@ -35,7 +35,13 @@ const Experience = () => {
         >
             {/* Background Visual Asset */}
             <div className={styles.visualWrapper}>
-                <img src={standoutSvg} alt="" className={styles.standoutImage} />
+                <img 
+                    src={standoutSvg} 
+                    alt="" 
+                    className={styles.standoutImage} 
+                    width="400"
+                    height="400"
+                />
             </div>
 
             <div className={`container ${styles.container}`}>

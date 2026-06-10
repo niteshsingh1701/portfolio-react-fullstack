@@ -70,6 +70,17 @@
   box-sizing: border-box;
 }
 
+/* Global Focus Strategy — Vercel Guideline Compliance */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -97,8 +108,10 @@ h1, h2, h3, h4, .serif-font {
   color: var(--text-primary);
 }
 
+/* Ensure consistent image behavior to prevent CLS */
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
