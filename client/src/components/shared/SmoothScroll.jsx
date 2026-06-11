@@ -19,17 +19,6 @@ const SmoothScroll = () => {
 
     requestAnimationFrame(raf);
 
-    // Track scroll for reveal effects
-    lenis.on("scroll", () => {
-      const reveals = document.querySelectorAll(".reveal-on-scroll");
-      reveals.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.85) {
-          el.classList.add("is-visible");
-        }
-      });
-    });
-
     return () => {
       lenis.destroy();
     };

@@ -54,9 +54,10 @@
     0 24px 60px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(244, 234, 216, 0.08),
     inset 0 0 0 1px rgba(244, 234, 216, 0.03);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
   transform-style: preserve-3d;
   z-index: 1;
+  will-change: transform, opacity;
 }
 
 .visualFrame::before {
@@ -273,13 +274,14 @@
   border-radius: 18px;
   background: var(--visual-card-bg);
   border: 1px solid var(--visual-card-border);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.24);
   display: flex;
   flex-direction: column;
   gap: 2px;
   z-index: 8;
   transform: translateZ(42px);
+  will-change: transform, opacity;
 }
 
 .floatCard span {

@@ -1,5 +1,4 @@
 .aboutSection {
-  background: var(--bg-primary);
   position: relative;
   opacity: 0;
   transform: translateY(20px);

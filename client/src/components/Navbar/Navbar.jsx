@@ -1,8 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Shuffle from "../shared/Shuffle";
 import ThemeToggle from "../shared/ThemeToggle";
 import styles from "./Navbar.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const NAV_LINKS = [
     { label: "Home", href: "/#home" },
@@ -13,14 +17,26 @@ const NAV_LINKS = [
 ];
 
 const Navbar = () => {
-    const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const headerRef = useRef(null);
     const { pathname } = useLocation();
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+        const header = headerRef.current;
+        
+        const st = ScrollTrigger.create({
+            start: 20,
+            end: "bottom bottom",
+            onUpdate: (self) => {
+                if (self.scroll() > 20) {
+                    header.classList.add(styles.scrolled);
+                } else {
+                    header.classList.remove(styles.scrolled);
+                }
+            }
+        });
+
+        return () => st.kill();
     }, []);
 
     // Close mobile menu on route change
@@ -33,14 +49,18 @@ const Navbar = () => {
                 e.preventDefault();
                 const id = href.replace("/#", "");
                 const el = document.getElementById(id);
-                if (el) el.scrollIntoView({ behavior: "smooth" });
+                if (el) {
+                    const offset = 80; // Account for fixed header
+                    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: "smooth" });
+                }
             }
         }
         setMenuOpen(false);
     };
 
     return (
-        <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
+        <header ref={headerRef} className={styles.header}>
             <nav className={styles.nav} role="navigation" aria-label="Main navigation">
                 <div className={styles.container}>
                     {/* Logo */}
