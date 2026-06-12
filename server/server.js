@@ -88,8 +88,8 @@ app.use((err, req, res, next) => {
 const startServer = async () => {
   await connectDB();
   app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log(`API root: http://localhost:${PORT}/api/projects`);
+    console.log(`Server running on:${PORT}`);
+    console.log(`API root:${PORT}/api/projects`);
   });
 };
 

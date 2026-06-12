@@ -24,29 +24,33 @@ const ThemeToggleButton2 = () => {
     useEffect(() => {
         if (!buttonRef.current) return;
 
-        gsap.to(thumbRef.current, {
-            x: isDark ? 30 : 0,
-            duration: 0.38,
-            ease: "power3.inOut",
-        });
+        const ctx = gsap.context(() => {
+            gsap.to(thumbRef.current, {
+                x: isDark ? 30 : 0,
+                duration: 0.38,
+                ease: "power3.inOut",
+            });
 
-        gsap.to(sunRef.current, {
-            opacity: isDark ? 0 : 1,
-            scale: isDark ? 0.65 : 1,
-            rotate: isDark ? -70 : 0,
-            transformOrigin: "50% 50%",
-            duration: 0.38,
-            ease: "power3.inOut",
-        });
+            gsap.to(sunRef.current, {
+                opacity: isDark ? 0 : 1,
+                scale: isDark ? 0.65 : 1,
+                rotate: isDark ? -70 : 0,
+                transformOrigin: "50% 50%",
+                duration: 0.38,
+                ease: "power3.inOut",
+            });
 
-        gsap.to(moonRef.current, {
-            opacity: isDark ? 1 : 0,
-            scale: isDark ? 1 : 0.6,
-            rotate: isDark ? 0 : 40,
-            transformOrigin: "50% 50%",
-            duration: 0.38,
-            ease: "power3.inOut",
-        });
+            gsap.to(moonRef.current, {
+                opacity: isDark ? 1 : 0,
+                scale: isDark ? 1 : 0.6,
+                rotate: isDark ? 0 : 40,
+                transformOrigin: "50% 50%",
+                duration: 0.38,
+                ease: "power3.inOut",
+            });
+        }, buttonRef);
+
+        return () => ctx.revert();
     }, [isDark]);
 
     return (

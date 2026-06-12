@@ -1,111 +1,93 @@
+import { useEffect, useRef, useState } from "react";
 import styles from "./Skills.module.css";
 
-const CORE_SKILLS = [
-    { icon: "fab fa-react", label: "React.js" },
-    {icon: "fab fa-js", label: "Next.js"},
-    { icon: "fab fa-node-js", label: "Node.js" },
-    { icon: "fab fa-js", label: "JavaScript (ES6+)" },
-    { icon: "fas fa-layer-group", label: "Component Architecture" },
-    { icon: "fas fa-code-branch", label: "State Management (Redux Toolkit, Context API)" },
-    { icon: "fas fa-plug", label: "API Integration & Data Handling" },
-    { icon: "fas fa-chart-line", label: "Dashboard & Data-Driven UI" },
-    { icon: "fas fa-magic", label: "Animations (GSAP, Framer Motion)" },
-];
+// Import background asset
+import toolsSvg from "../../assets/tools.svg";
 
-const FRONTEND_SKILLS = [
-    { icon: "fab fa-html5", label: "HTML5" },
-    { icon: "fab fa-css3-alt", label: "CSS3 / SCSS" },
-    { icon: "fas fa-wind", label: "Tailwind CSS" },
-    { icon: "fab fa-bootstrap", label: "Bootstrap" },
-    { icon: "fas fa-mobile-alt", label: "Responsive & Mobile-First Design" },
-    { icon: "fas fa-universal-access", label: "Accessibility (WCAG)" },
-    { icon: "fas fa-tachometer-alt", label: "Performance Optimization" },
-];
-
-const AI_SKILLS = [
-    { icon: "fas fa-brain", label: "Claude AI - Development & Problem Solving" },
-    { icon: "fab fa-github", label: "GitHub Copilot - Code Generation" },
-    { icon: "fas fa-comments", label: "Prompt Engineering - AI Workflows" },
-    { icon: "fas fa-rocket", label: "AI-Powered Prototyping & Rapid Iteration" },
-];
-
-const TOOL_SKILLS = [
-    { icon: "fab fa-git-alt", label: "Git" },
-    { icon: "fab fa-github", label: "GitHub" },
-    { icon: "fas fa-tools", label: "Chrome DevTools" },
-    { icon: "fas fa-tools", label: "Lighthouse" },
-    { icon: "fas fa-tasks", label: "Jira / Agile Workflow" },
+const SKILL_GROUPS = [
+    {
+        category: "Core Expertise",
+        skills: ["React.js", "Next.js", "Node.js / Express", "AWS Cloud", "Docker", "JavaScript (ES6+)", "Component Architecture", "Zustand / Redux / TanStack", "API Design & Security"]
+    },
+    {
+        category: "Frontend & UI",
+        skills: ["HTML5 / CSS3", "Tailwind CSS", "GSAP Animations", "Responsive Design", "Accessibility (WCAG)", "SEO Best Practices", "Performance Optimization", "Refined Typography"]
+    },
+    {
+        category: "AI & Innovation",
+        skills: ["AI-Augmented Engineering", "Claude & Copilot Workflows", "Prompt Engineering", "Security-First Prototyping", "Rapid Iteration Systems"]
+    },
+    {
+        category: "Tools & Process",
+        skills: ["Git / GitHub", "CI/CD Pipelines", "Linux / Bash", "Chrome DevTools", "Jira / Agile", "Figma-to-Code"]
+    }
 ];
 
 const Skills = () => {
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setIsVisible(true);
+                observer.unobserve(entries[0].target);
+            }
+        }, { threshold: 0.05 });
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <section id="skills" className={`section section-alt ${styles.skillsSection}`}>
-            <div className={`container ${styles.skillsContainer}`}>
-                <div className={`section-header ${styles.sectionHeader}`}>
-                    <span className={styles.eyebrow}>Skill Notebook</span>
-                    <h2>Skills & Expertise</h2>
-                    <div className="section-divider" />
+        <section 
+            id="skills" 
+            className={`${styles.section} ${isVisible ? styles.isVisible : ""}`} 
+            ref={sectionRef}
+        >
+            {/* Background Visual Asset */}
+            <div className={styles.visualWrapper}>
+                <img 
+                    src={toolsSvg} 
+                    alt="" 
+                    className={styles.toolsImage} 
+                    width="500"
+                    height="500"
+                />
+            </div>
+
+            <div className={`container ${styles.container}`}>
+                <div className={styles.header}>
+                    <span className={styles.eyebrow}>The Toolkit</span>
+                    <h2 className={styles.title}>
+                        Technical <span className="serif-font">Proficiency</span> & <br />
+                        Digital <span className="serif-font">Capabilities.</span>
+                    </h2>
                 </div>
 
                 <div className={styles.grid}>
-
-                    {/* CORE */}
-                    <div className={styles.group}>
-                        <h3 className={styles.groupTitle}>Core Expertise</h3>
-                        <div className={styles.tags}>
-                            {CORE_SKILLS.map((s) => (
-                                <span key={s.label} className="skill-tag core">
-                                    <i className={s.icon} />
-                                    {s.label}
-                                </span>
-                            ))}
+                    {SKILL_GROUPS.map((group) => (
+                        <div key={group.category} className={styles.group}>
+                            <h3 className={styles.groupTitle}>{group.category}</h3>
+                            <div className={styles.tags}>
+                                {group.skills.map((skill) => (
+                                    <span key={skill} className={styles.tag}>
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-
-                    {/* FRONTEND */}
-                    <div className={styles.group}>
-                        <h3 className={styles.groupTitle}>Frontend Development</h3>
-                        <div className={styles.tags}>
-                            {FRONTEND_SKILLS.map((s) => (
-                                <span key={s.label} className="skill-tag">
-                                    <i className={s.icon} />
-                                    {s.label}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* AI & PRODUCTIVITY */}
-                    <div className={styles.group}>
-                        <h3 className={styles.groupTitle}>AI & Productivity</h3>
-                        <div className={styles.tags}>
-                            {AI_SKILLS.map((s) => (
-                                <span key={s.label} className="skill-tag">
-                                    <i className={s.icon} />
-                                    {s.label}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* TOOLS */}
-                    <div className={styles.group}>
-                        <h3 className={styles.groupTitle}>Tools & Workflow</h3>
-                        <div className={styles.tags}>
-                            {TOOL_SKILLS.map((s) => (
-                                <span key={s.label} className="skill-tag tools">
-                                    <i className={s.icon} />
-                                    {s.label}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-
+                    ))}
                 </div>
 
-                <p className={styles.quote}>
-                    Focused on building scalable, high-performance frontend systems with real-world impact.
-                </p>
+                <footer className={styles.footer}>
+                    <p className={styles.statement}>
+                        Continuously evolving at the intersection of design precision and technical excellence.
+                    </p>
+                </footer>
             </div>
         </section>
     );

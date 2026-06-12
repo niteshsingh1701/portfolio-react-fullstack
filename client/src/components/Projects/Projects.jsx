@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import useFetchProjects from "../../hooks/useFetchProjects";
 import ProjectCard from "./ProjectCard";
 import LoadingSpinner from "../shared/LoadingSpinner";
@@ -11,9 +11,23 @@ const Projects = () => {
     const { projects, loading, error } = useFetchProjects();
     const [activeFilter, setActiveFilter] = useState("All");
     const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-    const [activeDot, setActiveDot] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
 
-    const carouselRef = useRef(null);
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setIsVisible(true);
+                observer.unobserve(entries[0].target);
+            }
+        }, { threshold: 0.05 });
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
 
     const filtered =
         activeFilter === "All"
@@ -29,46 +43,21 @@ const Projects = () => {
     const handleFilterChange = (f) => {
         setActiveFilter(f);
         setVisibleCount(ITEMS_PER_PAGE);
-        setActiveDot(0);
-        if (carouselRef.current) {
-            carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
-        }
-    };
-
-    // Update dot indicator on scroll
-    const handleCarouselScroll = useCallback(() => {
-        const el = carouselRef.current;
-        if (!el) return;
-        const cardWidth = el.scrollWidth / visible.length;
-        const index = Math.round(el.scrollLeft / cardWidth);
-        setActiveDot(index);
-    }, [visible.length]);
-
-    useEffect(() => {
-        const el = carouselRef.current;
-        if (!el) return;
-        el.addEventListener("scroll", handleCarouselScroll, { passive: true });
-        return () => el.removeEventListener("scroll", handleCarouselScroll);
-    }, [handleCarouselScroll]);
-
-    // Reset dot when filter changes
-    useEffect(() => {
-        setActiveDot(0);
-    }, [activeFilter]);
-
-    const scrollToCard = (index) => {
-        const el = carouselRef.current;
-        if (!el) return;
-        const cardWidth = el.scrollWidth / visible.length;
-        el.scrollTo({ left: cardWidth * index, behavior: "smooth" });
     };
 
     return (
-        <section id="projects" className={`section ${styles.projectsSection}`}>
+        <section 
+            id="projects" 
+            className={`${styles.projectsSection} ${isVisible ? styles.isVisible : ""}`} 
+            ref={sectionRef}
+        >
             <div className={`container ${styles.projectsContainer}`}>
-                <div className={`section-header ${styles.sectionHeader}`}>
-                    <h2>My Projects</h2>
-                    <div className="section-divider" />
+                <div className={styles.header}>
+                    <span className={styles.eyebrow}>The Portfolio</span>
+                    <h2 className={styles.title}>
+                        Digital <span className="serif-font">Products</span> & <br />
+                        Client <span className="serif-font">Showcase.</span>
+                    </h2>
                 </div>
 
                 {/* Filter Buttons */}
@@ -100,60 +89,20 @@ const Projects = () => {
 
                 {!loading && !error && (
                     <>
-                        {/* ─── Desktop Grid ─── */}
                         <div className={styles.grid}>
                             {visible.map((project) => (
                                 <ProjectCard key={project._id} project={project} />
                             ))}
                         </div>
 
-                        {/* ─── Mobile Carousel ─── */}
-                        <div className={styles.carouselWrapper}>
-                            <div
-                                className={styles.carousel}
-                                ref={carouselRef}
-                            >
-                                {filtered.map((project) => (
-                                    <ProjectCard key={project._id} project={project} />
-                                ))}
-                            </div>
-
-                            {/* Dot indicators */}
-                            {filtered.length > 1 && (
-                                <div className={styles.dots}>
-                                    {filtered.map((_, i) => (
-                                        <button
-                                            key={i}
-                                            className={`${styles.dot} ${activeDot === i ? styles.activeDot : ""}`}
-                                            onClick={() => scrollToCard(i)}
-                                            aria-label={`Go to project ${i + 1}`}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* ─── Load More / Show Less (desktop only) ─── */}
+                        {/* Load More */}
                         {visibleCount < filtered.length && (
-                            <div className={`${styles.center} ${styles.desktopOnly}`}>
+                            <div className={styles.center}>
                                 <button
                                     className="outline-btn"
                                     onClick={() => setVisibleCount((prev) => prev + ITEMS_PER_PAGE)}
                                 >
-                                    <i className="fas fa-chevron-down" />
-                                    Load More
-                                </button>
-                            </div>
-                        )}
-
-                        {visibleCount >= filtered.length && filtered.length > ITEMS_PER_PAGE && (
-                            <div className={`${styles.center} ${styles.desktopOnly}`}>
-                                <button
-                                    className="outline-btn"
-                                    onClick={() => setVisibleCount(ITEMS_PER_PAGE)}
-                                >
-                                    <i className="fas fa-chevron-up" />
-                                    Show Less
+                                    View More Projects
                                 </button>
                             </div>
                         )}
