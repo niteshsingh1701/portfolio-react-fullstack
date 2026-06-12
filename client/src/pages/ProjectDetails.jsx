@@ -39,7 +39,30 @@ const ProjectDetails = () => {
     if (loading) return <div className={styles.loading}><LoadingSpinner /></div>;
     if (error) return <div className={styles.error}><h1>{error}</h1><Link to="/">Back to Home</Link></div>;
 
-    const heroImg = `https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop`;
+    // Dynamic placeholder mapping (Sync with ProjectCard)
+    const webPlaceholders = [
+        "photo-1498050108023-c5249f4df085",
+        "photo-1461749280684-dccba630e2f6",
+        "photo-1498758536662-35b82cd15e29",
+        "photo-1517694712202-14dd9538aa97",
+        "photo-1550745165-9bc0b252726f",
+        "photo-1555066931-4365d14bab8c",
+        "photo-1587620962725-abab7fe55159",
+        "photo-1516116216624-53e697fedbea",
+        "photo-1522542550221-31fd19575a2d",
+        "photo-1558655146-d09347e92766"
+    ];
+
+    const getPlaceholderIndex = (id) => {
+        if (!id) return 0;
+        const charSum = id.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+        return charSum % webPlaceholders.length;
+    };
+
+    const imageId = webPlaceholders[getPlaceholderIndex(id)];
+    const fallbackImage = `https://images.unsplash.com/${imageId}?auto=format&fit=crop&q=80&w=2000`;
+    const heroImg = project.image || fallbackImage;
+
 
     return (
         <article className={styles.page} ref={pageRef}>
