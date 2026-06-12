@@ -5,24 +5,24 @@
 
 /* ─── CSS Variables ─────────────────────────────── */
 :root {
-  /* --- Premium Editorial Palette --- */
-  --bg-primary: #faf9f6;    /* Gallery White */
-  --bg-secondary: #f5f2eb;  /* Pearl */
-  --bg-tertiary: #ede8df;   /* Soft Sand */
+  /* --- Premium Dark Palette (Default) --- */
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-tertiary: #2a2a2a;
   
-  --text-primary: #1c1c1c;  /* Deep Charcoal */
-  --text-secondary: #4a4a4a; /* Muted Ink */
+  --text-primary: #f5f2eb;   /* Pearl White */
+  --text-secondary: #c2c2c2; /* Silver Mist */
   --text-faint: #8d8d8d;
   
-  --accent: #b45b63;        /* Muted Rose */
-  --accent-soft: rgba(180, 91, 99, 0.08);
+  --accent: #b45b63;         /* Muted Rose */
+  --accent-soft: rgba(180, 91, 99, 0.15);
   
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
   
   /* --- Modern Depth --- */
-  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.03);
-  --shadow-premium: 0 12px 40px rgba(0, 0, 0, 0.06);
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-premium: 0 12px 40px rgba(0, 0, 0, 0.4);
   
   /* --- Typography & Spacing --- */
   --font-serif: "Playfair Display", serif;
@@ -35,7 +35,7 @@
   --transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   --transition-slow: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 
-  /* Legacy variable mapping for compatibility during transition */
+  /* Legacy mapping */
   --bg: var(--bg-primary);
   --text: var(--text-primary);
   --text-muted: var(--text-secondary);
@@ -43,22 +43,22 @@
   --secondary: var(--text-secondary);
   --border: var(--border-subtle);
   --border-primary: var(--border-medium);
-  --nav-bg: rgba(250, 249, 246, 0.9);
+  --nav-bg: rgba(18, 18, 18, 0.9);
 
-  color-scheme: light;
+  color-scheme: dark;
 }
 
-/* Base Override for dark theme preference - keeping it light for revamp */
-[data-theme="dark"] {
-  --bg-primary: #121212;
-  --bg-secondary: #1e1e1e;
-  --bg-tertiary: #2a2a2a;
-  --text-primary: #f5f2eb;
-  --text-secondary: #c2c2c2;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.15);
-  --nav-bg: rgba(18, 18, 18, 0.9);
-  color-scheme: dark;
+/* Light theme override */
+[data-theme="light"] {
+  --bg-primary: #faf9f6;    /* Gallery White */
+  --bg-secondary: #f5f2eb;  /* Pearl */
+  --bg-tertiary: #ede8df;   /* Soft Sand */
+  --text-primary: #1c1c1c;  /* Deep Charcoal */
+  --text-secondary: #4a4a4a; /* Muted Ink */
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --nav-bg: rgba(250, 249, 246, 0.9);
+  color-scheme: light;
 }
 
 /* ─── Reset & Base ──────────────────────────────── */

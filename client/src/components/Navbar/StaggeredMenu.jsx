@@ -10,10 +10,7 @@ export const StaggeredMenu = ({
   displaySocials = true,
   displayItemNumbering = true,
   className,
-  logoUrl = '',
   logoComponent = null,
-  extraHeaderContent = null,
-  extraFooterContent = null,
   menuButtonColor = 'var(--text-primary)',
   openMenuButtonColor = 'var(--text-primary)',
   accentColor = 'var(--accent)',
@@ -32,7 +29,6 @@ export const StaggeredMenu = ({
   const plusVRef = useRef(null);
   const iconRef = useRef(null);
   const textInnerRef = useRef(null);
-  const textWrapRef = useRef(null);
   const [textLines, setTextLines] = useState(['Menu', 'Close']);
 
   const openTlRef = useRef(null);
@@ -42,7 +38,6 @@ export const StaggeredMenu = ({
   const colorTweenRef = useRef(null);
   const toggleBtnRef = useRef(null);
   const busyRef = useRef(false);
-  const itemEntranceTweenRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -84,13 +79,11 @@ export const StaggeredMenu = ({
       closeTweenRef.current.kill();
       closeTweenRef.current = null;
     }
-    itemEntranceTweenRef.current?.kill();
 
     const itemEls = Array.from(panel.querySelectorAll('.sm-panel-itemLabel'));
     const numberEls = Array.from(panel.querySelectorAll('.sm-panel-list[data-numbering] .sm-panel-item'));
     const socialTitle = panel.querySelector('.sm-socials-title');
     const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link'));
-    const footerContent = panel.querySelector('.sm-panel-footer');
 
     const offscreen = position === 'left' ? -100 : 100;
     const layerStates = layers.map(el => ({ el, start: offscreen }));
@@ -107,9 +100,6 @@ export const StaggeredMenu = ({
     }
     if (socialLinks.length) {
       gsap.set(socialLinks, { y: 25, opacity: 0 });
-    }
-    if (footerContent) {
-      gsap.set(footerContent, { opacity: 0, y: 10 });
     }
 
     const tl = gsap.timeline({ paused: true });
@@ -186,19 +176,6 @@ export const StaggeredMenu = ({
       }
     }
 
-    if (footerContent) {
-      tl.to(
-        footerContent,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power2.out'
-        },
-        '-=0.3'
-      );
-    }
-
     openTlRef.current = tl;
     return tl;
   }, [position]);
@@ -220,7 +197,6 @@ export const StaggeredMenu = ({
   const playClose = useCallback(() => {
     openTlRef.current?.kill();
     openTlRef.current = null;
-    itemEntranceTweenRef.current?.kill();
 
     const panel = panelRef.current;
     const layers = preLayerElsRef.current;
@@ -245,10 +221,8 @@ export const StaggeredMenu = ({
         }
         const socialTitle = panel.querySelector('.sm-socials-title');
         const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link'));
-        const footerContent = panel.querySelector('.sm-panel-footer');
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
-        if (footerContent) gsap.set(footerContent, { opacity: 0, y: 10 });
         busyRef.current = false;
       }
     });
@@ -382,29 +356,14 @@ export const StaggeredMenu = ({
       <div ref={preLayersRef} className="sm-prelayers" aria-hidden="true">
         {(() => {
           const raw = colors && colors.length ? colors.slice(0, 4) : ['#1e1e22', '#35353c'];
-          let arr = [...raw];
-          if (arr.length >= 3) {
-            const mid = Math.floor(arr.length / 2);
-            arr.splice(mid, 1);
-          }
-          return arr.map((c, i) => <div key={i} className="sm-prelayer" style={{ background: c }} />);
+          return raw.map((c, i) => <div key={i} className="sm-prelayer" style={{ background: c }} />);
         })()}
       </div>
       <header className="staggered-menu-header" aria-label="Main navigation header">
         <div className="sm-logo" aria-label="Logo">
-          {logoComponent ? logoComponent : (
-            <img
-              src={logoUrl || '/src/assets/logos/reactbits-gh-white.svg'}
-              alt="Logo"
-              className="sm-logo-img"
-              draggable={false}
-              width={110}
-              height={24}
-            />
-          )}
+          {logoComponent}
         </div>
         <div className="sm-header-actions">
-          {extraHeaderContent}
           <button
             ref={toggleBtnRef}
             className="sm-toggle"
@@ -414,7 +373,7 @@ export const StaggeredMenu = ({
             onClick={toggleMenu}
             type="button"
           >
-            <span ref={textWrapRef} className="sm-toggle-textWrap" aria-hidden="true">
+            <span className="sm-toggle-textWrap" aria-hidden="true">
               <span ref={textInnerRef} className="sm-toggle-textInner">
                 {textLines.map((l, i) => (
                   <span className="sm-toggle-line" key={i}>
@@ -468,11 +427,6 @@ export const StaggeredMenu = ({
               <div className="sm-socials" aria-label="Social links">
                 <div className="sm-socials-header">
                   <h3 className="sm-socials-title">Socials</h3>
-                  {extraFooterContent && (
-                    <div className="sm-panel-footer">
-                      {extraFooterContent}
-                    </div>
-                  )}
                 </div>
                 <ul className="sm-socials-list" role="list">
                   {socialItems.map((s, i) => (

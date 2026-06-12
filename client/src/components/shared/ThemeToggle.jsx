@@ -4,15 +4,13 @@ import styles from "./ThemeToggle.module.css";
 const ThemeToggle = () => {
     const [isDark, setIsDark] = useState(() => {
         const stored = localStorage.getItem("portfolio-theme");
-        return stored ? stored === "dark" : false;
+        return stored ? stored === "dark" : true;
     });
 
     useEffect(() => {
-        document.documentElement.setAttribute(
-            "data-theme",
-            isDark ? "dark" : "light"
-        );
-        localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
+        const theme = isDark ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("portfolio-theme", theme);
     }, [isDark]);
 
     return (

@@ -343,11 +343,20 @@
     padding: 1rem 1.5rem;
   }
 
+  .staggered-menu-panel {
+    padding: 6rem 1.5rem 3rem 1.5rem;
+  }
+
   .sm-panel-inner {
-      padding-left: 1rem;
+      padding-left: 0.5rem;
   }
 
   .sm-panel-item {
-      font-size: 2.5rem;
+      font-size: 2rem;
+  }
+
+  .sm-panel-list[data-numbering] .sm-panel-item::before {
+    left: -1.8rem;
+    font-size: 0.8rem;
   }
 }
