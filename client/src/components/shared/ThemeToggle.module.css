@@ -1,21 +1,20 @@
 .toggle {
-  width: 40px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
   color: var(--text-primary);
   background: transparent;
-  border: 1px solid var(--border-medium);
+  border: none;
   transition: all var(--transition);
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+  padding: 0;
+  width: auto;
+  height: auto;
 }
 
 .toggle:hover {
-  background: var(--bg-secondary);
+  color: var(--accent-primary);
   transform: translateY(-1px);
 }
 

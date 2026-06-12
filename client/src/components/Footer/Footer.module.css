@@ -36,6 +36,24 @@
   gap: 8px;
 }
 
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.vSep {
+  width: 1px;
+  height: 14px;
+  background: var(--border-medium);
+}
+
 .socials {
   display: flex;
   align-items: center;

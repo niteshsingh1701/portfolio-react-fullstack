@@ -1,12 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLocation, Link } from "react-router-dom";
+import StaggeredMenu from "./StaggeredMenu";
 import Shuffle from "../shared/Shuffle";
-import ThemeToggle from "../shared/ThemeToggle";
-import styles from "./Navbar.module.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const NAV_LINKS = [
     { label: "Home", href: "/#home" },
@@ -16,104 +10,51 @@ const NAV_LINKS = [
     { label: "Contact", href: "/#contact" },
 ];
 
+const SOCIAL_LINKS = [
+    { label: "GitHub", link: "https://github.com/niteshsingh1701" },
+    { label: "LinkedIn", link: "https://linkedin.com/in/niteshsingh1701" },
+];
+
 const Navbar = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const headerRef = useRef(null);
     const { pathname } = useLocation();
-
-    useEffect(() => {
-        const header = headerRef.current;
-        
-        const st = ScrollTrigger.create({
-            start: 20,
-            end: "bottom bottom",
-            onUpdate: (self) => {
-                if (self.scroll() > 20) {
-                    header.classList.add(styles.scrolled);
-                } else {
-                    header.classList.remove(styles.scrolled);
-                }
-            }
-        });
-
-        return () => st.kill();
-    }, []);
-
-    // Close mobile menu on route change
-    useEffect(() => setMenuOpen(false), [pathname]);
 
     const handleNavClick = (e, href) => {
         if (href.startsWith("/#")) {
-            // Smooth scroll to section on home page
             if (pathname === "/") {
                 e.preventDefault();
                 const id = href.replace("/#", "");
                 const el = document.getElementById(id);
                 if (el) {
-                    const offset = 80; // Account for fixed header
+                    const offset = 80;
                     const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
                     window.scrollTo({ top, behavior: "smooth" });
                 }
             }
         }
-        setMenuOpen(false);
     };
 
+    const menuItems = NAV_LINKS.map((link) => ({
+        label: link.label,
+        link: link.href,
+        onClick: (e) => handleNavClick(e, link.href),
+        ariaLabel: `Go to ${link.label} section`
+    }));
+
     return (
-        <header ref={headerRef} className={styles.header}>
-            <nav className={styles.nav} role="navigation" aria-label="Main navigation">
-                <div className={styles.container}>
-                    {/* Logo */}
-                    <Link to="/" className={styles.logo}>
-                        <Shuffle text="Nitesh Singh" className={styles.logoText} />
-                    </Link>
-
-                    {/* Desktop Links */}
-                    <ul className={styles.links} role="list">
-                        {NAV_LINKS.map(({ label, href }) => (
-                            <li key={label}>
-                                <a
-                                    href={href}
-                                    className="nav-link"
-                                    onClick={(e) => handleNavClick(e, href)}
-                                >
-                                    {label}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-
-                    <div className={styles.actions}>
-                        <ThemeToggle />
-                        {/* Hamburger */}
-                        <button
-                            className={styles.hamburger}
-                            onClick={() => setMenuOpen((v) => !v)}
-                            aria-label="Toggle mobile menu"
-                            aria-expanded={menuOpen}
-                        >
-                            <i className={menuOpen ? "fas fa-times" : "fas fa-bars"} />
-                        </button>
-                    </div>
-                </div>
-
-                {/* Mobile Menu */}
-                {menuOpen && (
-                    <div className={styles.mobileMenu}>
-                        {NAV_LINKS.map(({ label, href }) => (
-                            <a
-                                key={label}
-                                href={href}
-                                className={styles.mobileLink}
-                                onClick={(e) => handleNavClick(e, href)}
-                            >
-                                {label}
-                            </a>
-                        ))}
-                    </div>
-                )}
-            </nav>
-        </header>
+        <StaggeredMenu
+            items={menuItems}
+            socialItems={SOCIAL_LINKS}
+            logoComponent={
+                <Link to="/" style={{ textDecoration: 'none' }}>
+                    <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                        <Shuffle text="Nitesh Singh" />
+                    </span>
+                </Link>
+            }
+            colors={['var(--bg-secondary)', 'var(--accent)']}
+            displayItemNumbering={true}
+            position="right"
+        />
     );
 };
 
