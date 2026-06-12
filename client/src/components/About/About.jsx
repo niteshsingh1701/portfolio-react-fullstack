@@ -10,15 +10,15 @@ const CONTENT = [
     {
         tag: "01",
         title: "The Experience",
-        body: "With over 2 years in the frontend landscape, I specialize in architecting scalable web applications. My journey is defined by a commitment to performance and maintainable codebases.",
-        subBody: "I've navigated complex fintech ecosystems, developing high-stakes dashboards and onboarding flows where precision and security are paramount.",
+        body: "With over 3 years in the engineering landscape, I've evolved from building interfaces to architecting resilient, full-stack systems. My focus is on the intersection of performance, infrastructure, and user-centric design.",
+        subBody: "I've navigated complex fintech ecosystems and cloud-native architectures, developing high-stakes dashboards where security, scalability, and deployment precision are paramount.",
         image: experienceSvg
     },
     {
         tag: "02",
         title: "The Craft",
-        body: "I build more than just interfaces; I build data-driven workflows. From dynamic charts to complex state management, my focus is on production-grade UI that feels alive.",
-        subBody: "Every pixel is intentional, every interaction is a chance to provide value and delight the user.",
+        body: "I build more than just UI; I build production-grade environments. My workflow integrates modern DevOps practices and AI-driven optimization to ensure every application is robust and future-proof.",
+        subBody: "From Dockerized microservices to pixel-perfect React components, every layer is intentional and engineered for long-term scale.",
         image: craftSvg
     },
     {

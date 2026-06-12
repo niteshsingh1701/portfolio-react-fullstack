@@ -64,7 +64,7 @@ const Experience = () => {
                             >
                                 <span className={styles.date}>{exp.duration}</span>
                                 <div className={styles.timelineContent}>
-                                    <h3 className={styles.company}>{exp.company}</h3>
+                                    <span className={styles.company}>{exp.company}</span>
                                     <span className={styles.role}>{exp.role}</span>
                                 </div>
                                 {activeId === exp.id && <span className={styles.indicator} />}

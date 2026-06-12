@@ -5,7 +5,6 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/shared/ScrollToTop";
-import SmoothScroll from "./components/shared/SmoothScroll";
 
 const Home = lazy(() => import("./pages/Home"));
 const ProjectDetails = lazy(() => import("./pages/ProjectDetails"));
@@ -15,7 +14,6 @@ function App() {
         <BrowserRouter>
             <Analytics />
             <SpeedInsights />
-            <SmoothScroll />
             <ScrollToTop />
             <Navbar />
             <main>

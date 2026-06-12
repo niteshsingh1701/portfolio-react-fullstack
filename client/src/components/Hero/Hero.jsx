@@ -29,9 +29,10 @@ const Hero = () => {
             Experiences with <span className="serif-font">Precision.</span>
           </h1>
           <p className={styles.para}>
-            I am Nitesh Singh, a Frontend Developer specialized in building 
-            high-performance, data-driven web applications with a focus 
-            on refined aesthetics and seamless motion.
+            I am Nitesh Singh, a Frontend-Heavy Software Engineer dedicated to 
+            shipping full-circle products. I blend architectural precision with 
+            modern cloud infrastructure and AI-augmented workflows to build 
+            secure, high-performance web systems.
           </p>
           <div className={styles.buttons}>
             <button

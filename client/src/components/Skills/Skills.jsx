@@ -7,19 +7,19 @@ import toolsSvg from "../../assets/tools.svg";
 const SKILL_GROUPS = [
     {
         category: "Core Expertise",
-        skills: ["React.js", "Next.js", "Node.js", "JavaScript (ES6+)", "Component Architecture", "Redux Toolkit", "Context API", "API Integration", "GSAP"]
+        skills: ["React.js", "Next.js", "Node.js / Express", "AWS Cloud", "Docker", "JavaScript (ES6+)", "Component Architecture", "Zustand / Redux / TanStack", "API Design & Security"]
     },
     {
         category: "Frontend & UI",
-        skills: ["HTML5", "CSS3 / SCSS", "Tailwind CSS", "Bootstrap", "Responsive Design", "Accessibility (WCAG)", "SEO Best Practices", "Performance Optimization"]
+        skills: ["HTML5 / CSS3", "Tailwind CSS", "GSAP Animations", "Responsive Design", "Accessibility (WCAG)", "SEO Best Practices", "Performance Optimization", "Refined Typography"]
     },
     {
         category: "AI & Innovation",
-        skills: ["Claude AI Workflows", "GitHub Copilot", "Prompt Engineering", "AI-Powered Prototyping", "Rapid Iteration Systems"]
+        skills: ["AI-Augmented Engineering", "Claude & Copilot Workflows", "Prompt Engineering", "Security-First Prototyping", "Rapid Iteration Systems"]
     },
     {
         category: "Tools & Process",
-        skills: ["Git", "GitHub", "Chrome DevTools", "Lighthouse", "Jira", "Agile Methodologies", "Figma-to-Code"]
+        skills: ["Git / GitHub", "CI/CD Pipelines", "Linux / Bash", "Chrome DevTools", "Jira / Agile", "Figma-to-Code"]
     }
 ];
 

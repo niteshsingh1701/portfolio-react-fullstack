@@ -37,7 +37,7 @@ const ProjectDetails = () => {
     }, [loading, project]);
 
     if (loading) return <div className={styles.loading}><LoadingSpinner /></div>;
-    if (error) return <div className={styles.error}><h2>{error}</h2><Link to="/">Back to Home</Link></div>;
+    if (error) return <div className={styles.error}><h1>{error}</h1><Link to="/">Back to Home</Link></div>;
 
     const heroImg = `https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop`;
 
@@ -61,11 +61,11 @@ const ProjectDetails = () => {
                     <aside className={styles.sidebar}>
                         <div className={styles.stickySidebar}>
                             <div className={styles.infoGroup}>
-                                <h4 className={styles.groupLabel}>Role</h4>
+                                <h2 className={styles.groupLabel}>Role</h2>
                                 <p className={styles.groupVal}>Frontend Architecture & UI</p>
                             </div>
                             <div className={styles.infoGroup}>
-                                <h4 className={styles.groupLabel}>Tech Stack</h4>
+                                <h2 className={styles.groupLabel}>Tech Stack</h2>
                                 <div className={styles.stackList}>
                                     {project.techStack?.map(t => <span key={t}>{t}</span>)}
                                 </div>
