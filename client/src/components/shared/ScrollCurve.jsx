@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import styles from './ScrollCurve.module.css';
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import styles from "./ScrollCurve.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +20,7 @@ const ScrollCurve = () => {
       gsap.set(path, {
         strokeDasharray: pathLength,
         strokeDashoffset: pathLength,
-        visibility: 'visible'
+        visibility: "visible",
       });
 
       const tl = gsap.timeline({
@@ -29,12 +29,12 @@ const ScrollCurve = () => {
           start: "top center",
           end: "bottom center",
           scrub: true,
-        }
+        },
       });
 
       tl.to(path, {
         strokeDashoffset: 0,
-        ease: "none"
+        ease: "none",
       });
 
       return () => {
@@ -63,7 +63,7 @@ const ScrollCurve = () => {
           strokeWidth="1.5"
           strokeOpacity="0.2"
           strokeLinecap="round"
-          style={{ visibility: 'hidden' }}
+          style={{ visibility: "hidden" }}
         />
       </svg>
     </div>
