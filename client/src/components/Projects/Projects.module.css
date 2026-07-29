@@ -88,18 +88,18 @@
   .projectsSection {
     padding: 100px 0;
   }
-  
+
   .grid {
     grid-template-columns: 1fr;
   }
-  
+
   .filters {
     overflow-x: auto;
     flex-wrap: nowrap;
     scrollbar-width: none;
     padding-bottom: 12px;
   }
-  
+
   .filterBtn {
     flex-shrink: 0;
   }
