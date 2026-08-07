@@ -29,9 +29,9 @@ const Hero = () => {
             Experiences with <span className="serif-font">Precision.</span>
           </h1>
           <p className={styles.para}>
-            I am Nitesh Singh, a Frontend-Heavy Software Engineer dedicated to 
-            shipping full-circle products. I blend architectural precision with 
-            modern cloud infrastructure and AI-augmented workflows to build 
+            I am Nitesh Singh, a Frontend-Heavy Software Engineer dedicated to
+            shipping full-circle products. I blend architectural precision with
+            modern cloud infrastructure and AI-augmented workflows to build
             secure, high-performance web systems.
           </p>
           <div className={styles.buttons}>
@@ -41,10 +41,7 @@ const Hero = () => {
             >
               Explore Work
             </button>
-            <button
-              className="outline-btn"
-              onClick={() => scrollTo("contact")}
-            >
+            <button className="outline-btn" onClick={() => scrollTo("contact")}>
               Let's Connect
             </button>
           </div>
@@ -52,17 +49,17 @@ const Hero = () => {
 
         <div className={styles.visual} ref={visualRef}>
           <div className={styles.imageWrapper}>
-            <img 
-              src={heroSvg} 
-              alt="Developer Activity" 
-              className={styles.heroImg} 
+            <img
+              src={heroSvg}
+              alt="Developer Activity"
+              className={styles.heroImg}
               width="800"
               height="517"
             />
           </div>
         </div>
       </div>
-      
+
       <div className={styles.scrollHint}>
         <div className={styles.mouse}>
           <div className={styles.wheel}></div>
