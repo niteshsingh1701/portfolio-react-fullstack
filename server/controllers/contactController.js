@@ -1,5 +1,7 @@
 const ContactMessage = require("../models/ContactMessage");
 const { getIsConnected } = require("../config/db");
+// EMAIL NOTIFICATION DISABLED — commented out to avoid production impact for now.
+// const { sendContactNotification } = require("../utils/mailer");
 const fs = require("fs");
 const path = require("path");
 
@@ -59,6 +61,16 @@ const submitContact = async (req, res) => {
         email: email.trim().toLowerCase(),
         message: message.trim(),
       });
+
+      // EMAIL NOTIFICATION DISABLED — commented out for now.
+      // sendContactNotification({
+      //   name: name.trim(),
+      //   email: email.trim().toLowerCase(),
+      //   message: message.trim(),
+      // }).catch((err) =>
+      //   console.error("Contact email notification failed:", err.message)
+      // );
+
       return res.status(201).json({
         success: true,
         message: "Message received! I'll get back to you soon.",
@@ -82,7 +94,16 @@ const submitContact = async (req, res) => {
     fs.writeFileSync(MESSAGES_FILE, JSON.stringify(inMemoryMessages, null, 2), "utf-8");
     
     console.log(`📬 New contact message saved to ${MESSAGES_FILE}:`, { name, email });
-    
+
+    // EMAIL NOTIFICATION DISABLED — commented out for now.
+    // sendContactNotification({
+    //   name: name.trim(),
+    //   email: email.trim().toLowerCase(),
+    //   message: message.trim(),
+    // }).catch((err) =>
+    //   console.error("Contact email notification failed:", err.message)
+    // );
+
     return res.status(201).json({
       success: true,
       message: "Message received! I'll get back to you soon.",
