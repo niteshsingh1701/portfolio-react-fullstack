@@ -39,19 +39,32 @@ const submitContact = async (req, res) => {
   if (!name || !email || !message) {
     return res
       .status(400)
-      .json({ success: false, message: "Please provide name, email, and message." });
+      .json({
+        success: false,
+        message: "Please provide name, email, and message.",
+      });
   }
   if (name.trim().length < 2) {
-    return res.status(400).json({ success: false, message: "Name must be at least 2 characters." });
+    return res
+      .status(400)
+      .json({ success: false, message: "Name must be at least 2 characters." });
   }
   const emailRegex = /^\S+@\S+\.\S+$/;
   if (!emailRegex.test(email)) {
-    return res.status(400).json({ success: false, message: "Please provide a valid email address." });
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "Please provide a valid email address.",
+      });
   }
   if (message.trim().length < 10) {
     return res
       .status(400)
-      .json({ success: false, message: "Message must be at least 10 characters." });
+      .json({
+        success: false,
+        message: "Message must be at least 10 characters.",
+      });
   }
 
   try {
@@ -87,13 +100,20 @@ const submitContact = async (req, res) => {
       message: message.trim(),
       createdAt: new Date(),
     };
-    
+
     inMemoryMessages.push(newMsg);
-    
+
     // Write back to file
-    fs.writeFileSync(MESSAGES_FILE, JSON.stringify(inMemoryMessages, null, 2), "utf-8");
-    
-    console.log(`📬 New contact message saved to ${MESSAGES_FILE}:`, { name, email });
+    fs.writeFileSync(
+      MESSAGES_FILE,
+      JSON.stringify(inMemoryMessages, null, 2),
+      "utf-8",
+    );
+
+    console.log(`📬 New contact message saved to ${MESSAGES_FILE}:`, {
+      name,
+      email,
+    });
 
     // EMAIL NOTIFICATION DISABLED — commented out for now.
     // sendContactNotification({
@@ -111,7 +131,12 @@ const submitContact = async (req, res) => {
     });
   } catch (err) {
     console.error("submitContact error:", err.message);
-    res.status(500).json({ success: false, message: "Server error. Please try again later." });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Server error. Please try again later.",
+      });
   }
 };
 
@@ -120,11 +145,15 @@ const getContactMessages = async (req, res) => {
   try {
     if (shouldUseMongoForContact()) {
       const messages = await ContactMessage.find().sort({ createdAt: -1 });
-      return res.json({ success: true, count: messages.length, data: messages });
+      return res.json({
+        success: true,
+        count: messages.length,
+        data: messages,
+      });
     }
 
     const sorted = [...inMemoryMessages].sort(
-      (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+      (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0),
     );
 
     return res.json({ success: true, count: sorted.length, data: sorted });
